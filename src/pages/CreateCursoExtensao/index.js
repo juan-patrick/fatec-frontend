@@ -19,55 +19,27 @@ import {
   Radio,
   CardActions,
   Button,
-  CircularProgress,
 } from "@material-ui/core";
 
 import * as Yup from "yup";
 
 import api from "../../services/api";
 
-import { useParams } from "react-router-dom";
-
-import { useEffect, useState } from "react";
-
-export default function UpdateCurso() {
-  const { cursoId } = useParams();
-
-  const [curso, setCurso] = useState({});
-  const [loading, setLoading] = useState(true);
-
+export default function CreateCursoExtensao() {
   const history = useHistory();
 
-  const getCurso = async () => {
-    await api
-      .get(`/cursos/${cursoId}`)
-      .then(({ data }) => {
-        setCurso(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        history.goBack();
-      });
-  };
-
-  useEffect(() => {
-    getCurso();
-  }, []);
-
-  const CursoSchema = Yup.object().shape({
-    nome_curso: Yup.string()
+  const CursoExtesaoSchema = Yup.object().shape({
+    nome_extensao: Yup.string()
       .min(3, "Nome muito pequeno.")
       .max(45, "Nome é muito grande")
       .required(),
-    descricao_curso: Yup.string().max(45).required(),
-    duracao_curso: Yup.number().required(),
-    situacao_curso: Yup.bool(),
-    cod_mec: Yup.string().max(45).required(),
+    tipo_extensao: Yup.string().max(45).required(),
+    status: Yup.bool(),
   });
+
   const handleSubmit = async (values, resetForm) => {
     await api
-      .put(`/cursoextensao/${cursoId}`, values)
+      .post("/cursoextensao", values)
       .then(({ data }) => {
         history.push("/cursos");
       })
@@ -98,13 +70,11 @@ export default function UpdateCurso() {
               <Divider />
               <Formik
                 initialValues={{
-                  nome_curso: curso.nome_curso,
-                  descricao_curso: curso.descricao_curso,
-                  duracao_curso: curso.duracao_curso,
-                  situacao_curso: curso.situacao_curso,
-                  cod_mec: curso.cod_mec,
+                  nome_extensao: "",
+                  tipo_extensao: "",
+                  status: true,
                 }}
-                validationSchema={CursoSchema}
+                validationSchema={CursoExtesaoSchema}
                 onSubmit={(values, { resetForm }) => {
                   handleSubmit(values, resetForm);
                 }}
@@ -115,50 +85,26 @@ export default function UpdateCurso() {
                       <Grid container spacing={3}>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="nome_curso"
-                            name="nome_curso"
+                            id="nome_extensao"
+                            name="nome_extensao"
                             label="Nome do Curso"
                             variant="outlined"
                             required
-                            value={values.nome_curso}
+                            value={values.nome_extensao}
                             onChange={handleChange}
                             fullWidth
-                            error={errors.nome_curso ? true : false}
-                            helperText={errors.nome_curso}
+                            error={errors.nome_extensao ? true : false}
+                            helperText={errors.nome_extensao}
                           />
                         </Grid>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="duracao_curso"
-                            name="duracao_curso"
-                            label="Duraçao do Curso"
+                            id="tipo_extensao"
+                            name="tipo_extensao"
+                            label="Tipo do Curso"
                             variant="outlined"
                             required
-                            value={values.duracao_curso}
-                            onChange={handleChange}
-                            fullWidth
-                          />
-                        </Grid>
-                        <Grid item md={12} xs={12}>
-                          <TextField
-                            id="descricao_curso"
-                            name="descricao_curso"
-                            label="Descrição do Curso"
-                            variant="outlined"
-                            required
-                            value={values.descricao_curso}
-                            onChange={handleChange}
-                            fullWidth
-                          />
-                        </Grid>
-                        <Grid item md={12} xs={12}>
-                          <TextField
-                            id="cod_mec"
-                            name="cod_mec"
-                            label="Código MEC"
-                            variant="outlined"
-                            required
-                            value={values.cod_mec}
+                            value={values.tipo_extensao}
                             onChange={handleChange}
                             fullWidth
                           />
@@ -168,7 +114,7 @@ export default function UpdateCurso() {
                             <FormLabel component="legend">Status</FormLabel>
                             <RadioGroup
                               name="status"
-                              value={values.situacao_curso}
+                              value={values.status}
                               onChange={handleChange}
                             >
                               <FormControlLabel
