@@ -29,12 +29,12 @@ import api from "../../services/api";
 export default function CreateProjeto() {
     const history = useHistory();
     const ProjetoSchema = Yup.object().shape({
-        nome_projetos: Yup.string().min(1, "Nome muito pequeno.").max(255, "Nome muito grande").required(),
-        descricao_projetos: Yup.string().max(255, "Descrição muito grande").required(),
-        carga_horaria: Yup.number().required(),
-        status: Yup.bool().required(),
-        data_ini: Yup.date().required(),
-        data_fim: Yup.date().required(),
+        nomeProjetos: Yup.string().min(1, "Nome muito pequeno.").max(255, "Nome muito grande").required(),
+        descricaoProjetos: Yup.string().max(255, "Descrição muito grande").required(),
+        cargaHoraria: Yup.number().required(),
+        situacaoProjetos: Yup.bool().required(),
+        dataInicial: Yup.date().required(),
+        dataFim: Yup.date().required(),
 
     });
     const handleSubmit = async (values, resetForm) => {
@@ -69,9 +69,9 @@ export default function CreateProjeto() {
                             <Divider />
                             <Formik
                                 initialValues={{
-                                    nome_projetos: "",
-                                    descricao_projetos: "",
-                                    situacao_projetos: true,
+                                    nomeProjetos: "",
+                                    descricaoProjetos: "",
+                                    situacaoProjetos: true,
                                 }}
                                 validationSchema={ProjetoSchema}
                                 onSubmit={(values, { resetForm }) => {
@@ -84,73 +84,73 @@ export default function CreateProjeto() {
                                             <Grid container spacing={3}>
                                                 <Grid item md={12} xs={12}>
                                                     <TextField
-                                                        id="nome_projetos"
-                                                        name="nome_projetos"
+                                                        id="nomeProjetos"
+                                                        name="nomeProjetos"
                                                         label="Nome do Projeto"
                                                         variant="outlined"
                                                         required
-                                                        value={values.nome_projetos}
+                                                        value={values.nomeProjetos}
                                                         onChange={handleChange}
-                                                        error={errors.nome_projetos ? true : false}
-                                                        helperText={errors.nome_projetos}
+                                                        error={errors.nomeProjetos ? true : false}
+                                                        helperText={errors.nomeProjetos}
                                                         fullWidth />
                                                 </Grid>
                                                 <Grid item md={12} xs={12}>
                                                     <TextField
-                                                        id="descricao_projetos"
+                                                        id="descricaoProjetos"
                                                         label="Descrição do Projeto"
                                                         fullWidth
                                                         multiline
                                                         rowsMax={4}
                                                         variant="outlined"
                                                         onChange={handleChange}
-                                                        value={values.descricao_projetos}
+                                                        value={values.descricaoProjetos}
                                                     />
                                                 </Grid>
                                                 <Grid item md={12} xs={12}>
                                                     <TextField
-                                                        id="carga_horaria"
-                                                        name="carga_horaria"
+                                                        id="cargaHoraria"
+                                                        name="cargaHoraria"
                                                         label="Carga Horaria"
                                                         variant="outlined"
                                                         required
                                                         onChange={handleChange}
-                                                        value={values.carga_horaria}
+                                                        value={values.cargaHoraria}
                                                         fullWidth
                                                         type="number" />
                                                 </Grid>
                                                 <Grid item md={12} xs={12}>
                                                     <TextField
-                                                        id="data_ini"
+                                                        id="dataInicial"
                                                         label="Data Inicial"
                                                         type="date"
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
                                                         onChange={handleChange}
-                                                        value={values.data_ini}
+                                                        value={values.dataInicial}
 
                                                     />
                                                 </Grid>
                                                 <Grid item md={12} xs={12}>
                                                     <TextField
-                                                        id="data_fim"
+                                                        id="dataFim"
                                                         label="Data Final"
                                                         type="date"
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
                                                         onChange={handleChange}
-                                                        value={values.data_fim}
+                                                        value={values.dataFim}
 
                                                     />
                                                 </Grid>
                                                 <Grid item md={12} xs={12}>
                                                     <FormControl component="fieldset">
-                                                        <FormLabel component="legend">Status</FormLabel>
+                                                        <FormLabel component="legend">situacaoProjetos</FormLabel>
                                                         <RadioGroup
-                                                            name="status"
-                                                            value={values.status}
+                                                            name="situacaoProjetos"
+                                                            value={values.situacaoProjetos}
                                                             onChange={handleChange}
                                                         >
                                                             <FormControlLabel

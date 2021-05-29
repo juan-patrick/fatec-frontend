@@ -60,7 +60,7 @@ export default function Tableprojeto({ data, setData }) {
                 style={{ maxHeight: "90%" }}>
                 <DialogTitle>Você deseja deletar este projeto?</DialogTitle>
                 <DialogContent dividers>
-                    <DialogContentText> Se você confirmar esta operação o projeto chamado: <b>{projetoToDelete.nome_projetos}</b> será deletado PERMANENTEMENTE</DialogContentText>
+                    <DialogContentText> Se você confirmar esta operação o projeto chamado: <b>{projetoToDelete.nomeProjetos}</b> será deletado PERMANENTEMENTE</DialogContentText>
                     <DialogActions>
                         <Grid container xs={12} md={12} spacing={4} justify="flex-end">
                             <Grid item>
@@ -124,12 +124,12 @@ export default function Tableprojeto({ data, setData }) {
                 <TableBody>
                     {data && data.map((projeto) => (
                         <TableRow key={projeto.id}>
-                            <TableCell>{projeto.nome_projetos}</TableCell>
-                            <TableCell>{projeto.descricao_projetos}</TableCell>
-                            <TableCell>{projeto.data_ini}</TableCell>
-                            <TableCell>{projeto.data_fim}</TableCell>
-                            <TableCell>{projeto.carga_horaria}</TableCell>
-                            <TableCell>{projeto.status ? "Ativo" : "Inativo"}</TableCell>
+                            <TableCell>{projeto.nomeProjetos}</TableCell>
+                            <TableCell>{projeto.descricaoProjetos}</TableCell>
+                            <TableCell>{projeto.dataInicial}</TableCell>
+                            <TableCell>{projeto.dataFim}</TableCell>
+                            <TableCell>{projeto.cargaHoraria}</TableCell>
+                            <TableCell>{projeto.situacaoProjetos ? "Ativo" : "Inativo"}</TableCell>
                             <TableCell>
                                 <Button
                                     variant="contained"

@@ -8,7 +8,9 @@ import UpdateCursoExtensao from "./pages/UpdateCursoExtensao";
 import CreateCurso from "./pages/CreateCurso";
 import UpdateCurso from "./pages/UpdateCurso";
 import Curso from "./pages/Curso";
-import Projeto from "./pages/Projeto"
+import Projeto from "./pages/Projeto";
+import CreateProjeto from "./pages/CreateProjeto";
+import UpdateProjeto from "./pages/UpdateProjeto";
 
 export default function Routes() {
   return (
