@@ -14,6 +14,7 @@ import {
     DialogContentText,
     DialogActions,
     Grid,
+    Divider,
 } from "@material-ui/core";
 
 
@@ -28,43 +29,63 @@ import api from "../../services/api";
 export default function Tableprojeto({ data, setData }) {
     const history = useHistory();
 
-    const [open, setOpen] = useState(false);
+    const [openDel, setOpenDel] = useState(false);
+    const [openShow, setOpenShow] = useState(false);
     const [projetoToDelete, setProjetoToDelete] = useState({});
-
-    const handleCloseDialog = () => {
-        setOpen(false);
+    const [projetoToView, setProjetoToView] = useState({});
+    
+    const handleCloseDialogDelete = () => {
+        setOpenDel(false);
         setProjetoToDelete({});
+
     };
-    const handleOpenDialog = (projeto) =>{
+    const handleCloseDialogView = () => {
+        setOpenShow(false);
+        setProjetoToView({});
+
+    };
+    const handleOpenDialogDelete = (projeto) => {
         setProjetoToDelete(projeto);
-        setOpen(true);
+        setOpenDel(true);
+    };
+    const handleOpenDialogShow = (projeto) => {
+        setProjetoToView(projeto);
+        setOpenShow(true);
+    };
+    function strslice(str){
+        if(str.length  >= 50){
+            return str.slice(0,50) + "...";
+        }
+        else return str
     }
 
     const deleteProjeto = async (projetoId) => {
         await api.delete(`/projeto/${projetoId}`).then(({ data }) => {
             console.log(data);
             setData();
-            handleCloseDialog();
+            handleCloseDialogDelete();
         }).catch((error) => {
             console.log(error);
-            handleCloseDialog();
+            handleCloseDialogDelete();
         });
     };
+
+
     const classes = useStyles();
     return (
         <TableContainer component={Paper}>
             <Dialog
-                open={open}
+                open={openDel}
                 disableBackdropClick
                 disableEscapeKeyDown
                 style={{ maxHeight: "90%" }}>
                 <DialogTitle>Você deseja deletar este projeto?</DialogTitle>
                 <DialogContent dividers>
-                    <DialogContentText> Se você confirmar esta operação o projeto chamado: <b>{projetoToDelete.nomeProjetos}</b> será deletado PERMANENTEMENTE</DialogContentText>
+                    <DialogContentText> Se você confirmar esta operação o projeto chamado: <b>{projetoToDelete.nome_projetos}</b> será deletado PERMANENTEMENTE</DialogContentText>
                     <DialogActions>
                         <Grid container xs={12} md={12} spacing={4} justify="flex-end">
                             <Grid item>
-                                <Button autoFocus color="primary" onClick={handleCloseDialog}>
+                                <Button autoFocus color="primary" onClick={handleCloseDialogDelete}>
                                     Cancelar
                                 </Button>
                             </Grid>
@@ -81,6 +102,42 @@ export default function Tableprojeto({ data, setData }) {
                     </DialogActions>
                 </DialogContent>
             </Dialog>
+            <Dialog
+                open={openShow}
+                disableBackdropClick
+                disableEscapeKeyDown
+                style={{ maxHeight: "90%" }}>
+
+                <DialogTitle><Typography variant="h5" align="center">{projetoToView.nomeProjetos}</Typography></DialogTitle>
+                <DialogContent dividers>
+                    <DialogContentText>
+                    <Typography style={{wordWrap: "break-word"}}>Descrição do Projeto: {projetoToView.descricaoProjetos}</Typography><Divider />
+                        Data Inicial do projeto: {projetoToView.dataInicial} <Divider />
+                        Data Final do projeto: {projetoToView.dataFim} <Divider />
+                        Carga Horaria do projeto(h): {projetoToView.cargaHoraria}h <Divider />
+                        Situação do projeto: {projetoToView.situacaoProjetos ? "Ativo" : "Inativo"}
+                    </DialogContentText>
+                    <DialogActions>
+                        <Grid container xs={12} md={12} spacing={0} justify="center">
+                            <Grid item>
+                                <Button autoFocus color="primary" onClick={handleCloseDialogView}
+                                >
+                                    Cancelar
+                                </Button>
+                            </Grid>
+                            <Grid item>
+                                <Button
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={(e) => history.push(`/update/projeto/${projetoToView.id}`)}
+                                >
+                                    Alterar
+                                 </Button>
+                            </Grid>
+                        </Grid>
+                    </DialogActions>
+                </DialogContent>
+            </Dialog>
             <Table className={classes.table}>
                 <TableHead>
                     <TableRow>
@@ -89,7 +146,7 @@ export default function Tableprojeto({ data, setData }) {
                                 <b>Nome do Projeto</b>
                             </Typography>
                         </TableCell>
-                        <TableCell>
+                        <TableCell >
                             <Typography variant="subtitle1">
                                 <b>Descrição do Projeto</b>
                             </Typography>
@@ -121,11 +178,11 @@ export default function Tableprojeto({ data, setData }) {
                         </TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody >
                     {data && data.map((projeto) => (
-                        <TableRow key={projeto.id}>
+                        <TableRow key={projeto.id} >
                             <TableCell>{projeto.nomeProjetos}</TableCell>
-                            <TableCell>{projeto.descricaoProjetos}</TableCell>
+                            <TableCell >{strslice(projeto.descricaoProjetos)}</TableCell>
                             <TableCell>{projeto.dataInicial}</TableCell>
                             <TableCell>{projeto.dataFim}</TableCell>
                             <TableCell>{projeto.cargaHoraria}</TableCell>
@@ -133,17 +190,17 @@ export default function Tableprojeto({ data, setData }) {
                             <TableCell>
                                 <Button
                                     variant="contained"
-                                    color="primary"
-                                    onClick={(e) => history.push(`/update/projeto/${projeto.id}`)}
+                                    className={classes.buttonView}
+                                    onClick={(e) => handleOpenDialogShow(projeto)}
                                 >
-                                    Alterar
+                                    View
                                  </Button>
                             </TableCell>
                             <TableCell>
                                 <Button
                                     variant="contained"
                                     color="secondary"
-                                    onClick={(e) => handleOpenDialog(projeto)}
+                                    onClick={(e) => handleOpenDialogDelete(projeto)}
                                 >
                                     Deletar
                                 </Button>
@@ -158,15 +215,22 @@ export default function Tableprojeto({ data, setData }) {
 
 const useStyles = makeStyles((theme) => ({
     table: {
-      minWidth: 650,
-      minHeight: 400,
+        minWidth: 650,
+        minHeight: 400,
+       
     },
     buttonDelete: {
-      backgroundColor: theme.palette.error.main,
-      color: theme.palette.error.contrastText,
-      "&:hover": {
-        backgroundColor: theme.palette.error.dark,
-      },
+        backgroundColor: theme.palette.error.main,
+        color: theme.palette.error.contrastText,
+        "&:hover": {
+            backgroundColor: theme.palette.error.dark,
+        },
     },
-  }));
-  
+    buttonView:{
+        backgroundColor: theme.palette.success.main,
+        color: "#fff",
+
+
+    },
+
+}));
