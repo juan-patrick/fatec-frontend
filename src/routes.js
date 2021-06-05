@@ -11,6 +11,12 @@ import Curso from "./pages/Curso";
 import Projeto from "./pages/Projeto";
 import CreateProjeto from "./pages/CreateProjeto";
 import UpdateProjeto from "./pages/UpdateProjeto";
+import Horario from "./pages/Horario";
+import CreateHorario from "./pages/CreateHorario";
+import UpdateHorario from "./pages/UpdateHorario";
+import Turma from "./pages/Turma";
+import CreateTurma from "./pages/CreateTurma";
+import UpdateTurma from "./pages/UpdateTurma";
 
 export default function Routes() {
   return (
@@ -30,6 +36,15 @@ export default function Routes() {
         <Route path="/projeto" component={Projeto} />
         <Route path="/create/projeto" component={CreateProjeto} /> 
         <Route path="/update/projeto/:projetoId" component={UpdateProjeto} />  
+
+        <Route path="/horario" component={Horario} />
+        <Route path="/create/horario" component={CreateHorario} /> 
+        <Route path="/update/horario/:horarioId" component={UpdateHorario} /> 
+
+        <Route path="/turma" component={Turma} />
+        <Route path="/create/turma" component={CreateTurma} /> 
+        <Route path="/update/turma/:turmaId" component={UpdateTurma} />   
+
       </Switch>
     </BrowserRouter>
   );
