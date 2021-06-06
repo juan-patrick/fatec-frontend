@@ -18,7 +18,7 @@ import {
   Avatar,
 } from '@material-ui/core';
 
-import { ChevronRightRounded, ChevronLeftRounded, HomeRounded, MenuBook, Folder, Extension } from '@material-ui/icons';
+import { ChevronRightRounded, ChevronLeftRounded, HomeRounded, MenuBook, Folder, Extension, AccessTime, School, } from '@material-ui/icons';
 
 import clsx from 'clsx';
 import { useState } from 'react';
@@ -143,14 +143,24 @@ export default function DrawerBar() {
               <Folder />
             </ListItemIcon>
             <ListItemText primary="Projetos" />
-
           </ListItem>
           <ListItem button key="cursos-extensao" onClick={(e) => history.push('/cursos-extensao')}>
             <ListItemIcon>
               <Extension />
             </ListItemIcon>
             <ListItemText primary="Cursos Extensão" />
-
+          </ListItem>
+          <ListItem button key="Horario" onClick={(e) => history.push('/horario')}>
+            <ListItemIcon>
+              <AccessTime />
+            </ListItemIcon>
+            <ListItemText primary="Horario" />
+          </ListItem>
+          <ListItem button key="Turma" onClick={(e) => history.push('/turma')}>
+            <ListItemIcon>
+              <School />
+            </ListItemIcon>
+            <ListItemText primary="Turma" />
           </ListItem>
         </List>
 
