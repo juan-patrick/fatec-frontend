@@ -17,6 +17,9 @@ import UpdateHorario from "./pages/UpdateHorario";
 import Turma from "./pages/Turma";
 import CreateTurma from "./pages/CreateTurma";
 import UpdateTurma from "./pages/UpdateTurma";
+import Staff from "./pages/Staff";
+import CreateStaff from "./pages/CreateStaff";
+import UpdateStaff from "./pages/UpdateSatff";
 
 export default function Routes() {
   return (
@@ -44,6 +47,10 @@ export default function Routes() {
         <Route path="/turma" component={Turma} />
         <Route path="/create/turma" component={CreateTurma} /> 
         <Route path="/update/turma/:turmaId" component={UpdateTurma} />   
+
+        <Route path="/staff" component={Staff} />
+        <Route path="/create/staff" component={CreateStaff} /> 
+        <Route path="/update/staff/:staffId" component={UpdateStaff} />   
 
       </Switch>
     </BrowserRouter>
