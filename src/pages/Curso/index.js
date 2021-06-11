@@ -1,9 +1,8 @@
 import Page from "../../components/Page";
-import TableCursoExtensao from "../../components/TableCurso";
+import TableCurso from "../../components/TableCurso";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { Grid, Button, Typography, Link } from "@material-ui/core";
-import TableCurso from "../../components/TableCurso";
 
 function Curso() {
   const [cursos, setCursos] = useState([]);

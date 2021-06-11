@@ -16,15 +16,23 @@ import {
   Box,
   Paper,
   Avatar,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import { ChevronRightRounded, ChevronLeftRounded, HomeRounded, MenuBook, Folder, Extension, AccessTime, School, } from '@material-ui/icons';
+import {
+  ChevronRightRounded,
+  ChevronLeftRounded,
+  HomeRounded,
+  MenuBook,
+  Folder,
+  Extension,
+  AccessTime,
+  School,
+} from "@material-ui/icons";
 
-import clsx from 'clsx';
-import { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { useHistory } from 'react-router';
-
+import clsx from "clsx";
+import { useState } from "react";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useHistory } from "react-router";
 
 export default function DrawerBar() {
   const history = useHistory();
@@ -33,7 +41,7 @@ export default function DrawerBar() {
   const theme = useTheme();
 
   const [open, setOpen] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl] = useState(null);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -60,21 +68,14 @@ export default function DrawerBar() {
             className={clsx(classes.menuButton, {
               [classes.hide]: open,
             })}
-          >
-          </IconButton>
+          ></IconButton>
           <Typography variant="h6" noWrap>
             FATEC
-            </Typography>
+          </Typography>
           <Box className={classes.accountBox}>
-
-            <Button
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-            >
+            <Button aria-controls="simple-menu" aria-haspopup="true">
               <Tooltip title="Juan Patrick">
-                <Avatar>
-                  JS
-                </Avatar>
+                <Avatar>JS</Avatar>
               </Tooltip>
             </Button>
             <Paper>
@@ -84,25 +85,23 @@ export default function DrawerBar() {
                 keepMounted
                 getContentAnchorEl={null}
                 anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'center',
+                  vertical: "bottom",
+                  horizontal: "center",
                 }}
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'center',
+                  vertical: "top",
+                  horizontal: "center",
                 }}
                 open={Boolean(anchorEl)}
               >
-                <MenuItem>
-                  Minha Conta
-                  </MenuItem>
+                <MenuItem>Minha Conta</MenuItem>
                 <Divider />
                 <MenuItem>Logout</MenuItem>
               </Menu>
             </Paper>
           </Box>
         </Toolbar>
-      </AppBar >
+      </AppBar>
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -118,7 +117,7 @@ export default function DrawerBar() {
       >
         <div className={classes.toolbar}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (
+            {theme.direction === "rtl" ? (
               <ChevronRightRounded />
             ) : (
               <ChevronLeftRounded />
@@ -126,37 +125,59 @@ export default function DrawerBar() {
           </IconButton>
         </div>
         <List>
-          <ListItem button key="home" onClick={(e) => history.push('/')}>
+          <ListItem button key="home" onClick={(e) => history.push("/")}>
             <ListItemIcon>
               <HomeRounded />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button key="curso" onClick={(e) => history.push('/cursos')}>
+          <ListItem button key="curso" onClick={(e) => history.push("/cursos")}>
             <ListItemIcon>
               <MenuBook />
             </ListItemIcon>
             <ListItemText primary="Cursos" />
           </ListItem>
-          <ListItem button key="projeto" onClick={(e) => history.push('/projeto')}>
+          <ListItem
+            button
+            key="projeto"
+            onClick={(e) => history.push("/projeto")}
+          >
             <ListItemIcon>
               <Folder />
             </ListItemIcon>
             <ListItemText primary="Projetos" />
           </ListItem>
-          <ListItem button key="cursos-extensao" onClick={(e) => history.push('/cursos-extensao')}>
+          <ListItem
+            button
+            key="disciplina"
+            onClick={(e) => history.push("/disciplina")}
+          >
+            <ListItemIcon>
+              <Folder />
+            </ListItemIcon>
+            <ListItemText primary="Disciplina" />
+          </ListItem>
+          <ListItem
+            button
+            key="cursos-extensao"
+            onClick={(e) => history.push("/cursos-extensao")}
+          >
             <ListItemIcon>
               <Extension />
             </ListItemIcon>
             <ListItemText primary="Cursos Extensão" />
           </ListItem>
-          <ListItem button key="Horario" onClick={(e) => history.push('/horario')}>
+          <ListItem
+            button
+            key="Horario"
+            onClick={(e) => history.push("/horario")}
+          >
             <ListItemIcon>
               <AccessTime />
             </ListItemIcon>
             <ListItemText primary="Horario" />
           </ListItem>
-          <ListItem button key="Turma" onClick={(e) => history.push('/turma')}>
+          <ListItem button key="Turma" onClick={(e) => history.push("/turma")}>
             <ListItemIcon>
               <School />
             </ListItemIcon>
@@ -166,22 +187,20 @@ export default function DrawerBar() {
 
         <List className={classes.last}>
           <ListItem button key="logout">
-            <ListItemIcon>
-            </ListItemIcon>
+            <ListItemIcon></ListItemIcon>
             <ListItemText primary="Log out" />
           </ListItem>
         </List>
       </Drawer>
     </>
   );
-};
-
+}
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   accountBox: {
-    marginLeft: 'auto',
+    marginLeft: "auto",
   },
   account: {
     color: theme.palette.primary.contrastText,
@@ -189,7 +208,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
@@ -197,7 +216,7 @@ const useStyles = makeStyles((theme) => ({
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -209,39 +228,39 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 36,
   },
   hide: {
-    display: 'none',
+    display: "none",
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: 'nowrap',
+    whiteSpace: "nowrap",
   },
   drawerOpen: {
     width: drawerWidth,
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   drawerClose: {
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    overflowX: 'hidden',
+    overflowX: "hidden",
     width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: theme.spacing(7) + 1,
     },
   },
   toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
   },
   last: {
-    marginTop: 'auto',
+    marginTop: "auto",
   },
 }));
