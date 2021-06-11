@@ -20,6 +20,7 @@ import UpdateHorario from "./pages/UpdateHorario";
 import Turma from "./pages/Turma";
 import CreateTurma from "./pages/CreateTurma";
 import UpdateTurma from "./pages/UpdateTurma";
+import Login from "./pages/Login";
 
 export default function Routes() {
   return (
@@ -33,6 +34,7 @@ export default function Routes() {
         <BrowserRouter>
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/login" component={Login} />
             <Route path="/cursos-extensao" component={CursoExtensao} />
             <Route path="/create/cursos-extensao" component={CreateCursoExtensao} />
             <Route
