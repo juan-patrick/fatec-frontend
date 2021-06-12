@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Extensao from "./pages/Extensao";
-import CreateExtensao from "./pages/CreateExtensao";
-import UpdateExtensao from "./pages/UpdateExtensao";
+import CursoExtensao from "./pages/CursoExtensao";
+import CreateCursoExtensao from "./pages/CreateCursoExtensao";
+import UpdateCursoExtensao from "./pages/UpdateCursoExtensao";
 
 import CreateCurso from "./pages/CreateCurso";
 import UpdateCurso from "./pages/UpdateCurso";
@@ -28,11 +28,14 @@ export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Extensao} />
-        <Route path="/extensao" component={Extensao} />
-        <Route path="/create/extensao" component={CreateExtensao} />
-        <Route path="/update/extensao/:cursoId" component={UpdateExtensao} />
-        
+        <Route path="/" exact component={CursoExtensao} />
+        <Route path="/cursoExtensao" component={CursoExtensao} />
+        <Route path="/create/cursoExtensao" component={CreateCursoExtensao} />
+        <Route
+          path="/update/cursoExtensao/:cursoExtensaoId"
+          component={UpdateCursoExtensao}
+        />
+
         <Route path="/cursos" component={Curso} />
         <Route path="/create/cursos" component={CreateCurso} />
         <Route path="/update/cursos/:cursoId" component={UpdateCurso} />
