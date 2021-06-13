@@ -18,6 +18,11 @@ import Turma from "./pages/Turma";
 import CreateTurma from "./pages/CreateTurma";
 import UpdateTurma from "./pages/UpdateTurma";
 
+// GRUPO 4
+import { ListSemana, CreateSemana, UpdateSemana } from "./pages/Semana"
+import { ListPeriodo, CreatePeriodo, UpdatePeriodo } from "./pages/Periodo"
+
+
 export default function Routes() {
   return (
     <BrowserRouter>
@@ -43,7 +48,15 @@ export default function Routes() {
 
         <Route path="/turma" component={Turma} />
         <Route path="/create/turma" component={CreateTurma} /> 
-        <Route path="/update/turma/:turmaId" component={UpdateTurma} />   
+        <Route path="/update/turma/:turmaId" component={UpdateTurma} />
+
+        <Route path="/semana" component={ListSemana} />
+        <Route path="/create/semana" component={CreateSemana} />
+        <Route path="/update/semana/:semanaId" component={UpdateSemana} />
+
+        <Route path="/periodo" component={ListPeriodo} />
+        <Route path="/create/periodo" component={CreatePeriodo} />
+        <Route path="/update/periodo/:periodoId" component={UpdatePeriodo} />
 
       </Switch>
     </BrowserRouter>
