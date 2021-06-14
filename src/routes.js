@@ -17,6 +17,15 @@ import UpdateHorario from "./pages/UpdateHorario";
 import Turma from "./pages/Turma";
 import CreateTurma from "./pages/CreateTurma";
 import UpdateTurma from "./pages/UpdateTurma";
+import CreateProfessor from './pages/CreateProfessor';
+import UpdateProfessor from './pages/UpdateProfessor';
+import Professor from './pages/Professor';
+import CreateInatividade from './pages/CreateInatividade';
+import UpdateInatividade from './pages/UpdateInatividade';
+import Inatividade from './pages/Inatividade';
+import CreateVinculo from './pages/CreateVinculo';
+import UpdateVinculo from './pages/UpdateVinculo';
+import Vinculo from './pages/Vinculo';
 
 export default function Routes() {
   return (
@@ -43,7 +52,19 @@ export default function Routes() {
 
         <Route path="/turma" component={Turma} />
         <Route path="/create/turma" component={CreateTurma} /> 
-        <Route path="/update/turma/:turmaId" component={UpdateTurma} />   
+        <Route path="/update/turma/:turmaId" component={UpdateTurma} /> 
+
+        <Route path="/professores" component={Professor} />
+        <Route path="/create/professores" component={CreateProfessor} />
+        <Route path="/update/professores/:professorId" component={UpdateProfessor} />
+
+        <Route path="/inatividades" component={Inatividade} />
+        <Route path="/create/inatividades" component={CreateInatividade} />
+        <Route path="/update/inatividades/:inatividadeId" component={UpdateInatividade} /> 
+
+        <Route path="/vinculos" component={Vinculo} />
+        <Route path="/create/vinculos" component={CreateVinculo} />
+        <Route path="/update/vinculos/:vinculoId" component={UpdateVinculo} />  
 
       </Switch>
     </BrowserRouter>
