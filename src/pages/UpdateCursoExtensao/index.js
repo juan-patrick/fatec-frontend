@@ -22,19 +22,19 @@ import { useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
-export default function UpdateExtensao() {
+export default function UpdateCursoExtensao() {
   const { cursoExtensaoId } = useParams();
 
-  const [extensao, setExtensao] = useState({});
+  const [cursoExtensao, setCursoExtensao] = useState({});
   const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
-  const getExtensao = async () => {
+  const getCursoExtensao = async () => {
     await api
-      .get(`/extensao/${cursoExtensaoId}`)
+      .get(`/cursoExtensao/${cursoExtensaoId}`)
       .then(({ data }) => {
-        setExtensao(data);
+        setCursoExtensao(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -44,23 +44,22 @@ export default function UpdateExtensao() {
   };
 
   useEffect(() => {
-    getExtensao();
+    getCursoExtensao();
   });
 
-  const ExtesaoSchema = Yup.object().shape({
+  const CursoExtesaoSchema = Yup.object().shape({
     nomeExtensao: Yup.string()
       .min(3, "Nome muito pequeno.")
       .max(45, "Nome é muito grande")
       .required(),
     tipoExtensao: Yup.string().max(45).required(),
-    status: Yup.bool(),
   });
 
   const handleSubmit = async (values, resetForm) => {
     await api
-      .put(`/extensao/${cursoExtensaoId}`, values)
+      .put(`/cursoExtensao/${cursoExtensaoId}`, values)
       .then(({ data }) => {
-        history.push("/extensao");
+        history.push("/cursoExtensao");
       })
       .catch((error) => {
         resetForm();
@@ -102,11 +101,11 @@ export default function UpdateExtensao() {
               ) : (
                 <Formik
                   initialValues={{
-                    nomeExtensao: extensao.nomeExtensao,
-                    tipoExtensao: extensao.tipoExtensao,
-                    status: extensao.Status,
+                    nomeExtensao: cursoExtensao.nomeExtensao,
+                    tipoExtensao: cursoExtensao.tipoExtensao,
+                    status: cursoExtensao.Status,
                   }}
-                  validationSchema={ExtesaoSchema}
+                  validationSchema={CursoExtesaoSchema}
                   onSubmit={(values, { resetForm }) => {
                     handleSubmit(values, resetForm);
                   }}
@@ -118,7 +117,7 @@ export default function UpdateExtensao() {
                           <TextField
                             id="tipoExtensao"
                             name="tipoExtensao"
-                            label="Tipo do Curso"
+                            label="Tipo do Curso de extensão"
                             variant="outlined"
                             required
                             value={values.tipoExtensao}

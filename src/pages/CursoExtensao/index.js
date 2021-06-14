@@ -31,7 +31,7 @@ function CursoExtensao() {
             </Typography>
           </Grid>
           <Grid item sm={2} md={6} lg={6} xs={2}>
-            <Link href="/create/extensao">
+            <Link href="/create/CursoExtensao">
               <Button size="large" color="primary" variant="contained">
                 Adicionar Curso de Extensão
               </Button>
