@@ -17,6 +17,9 @@ import UpdateHorario from "./pages/UpdateHorario";
 import Turma from "./pages/Turma";
 import CreateTurma from "./pages/CreateTurma";
 import UpdateTurma from "./pages/UpdateTurma";
+import Certificado from "./pages/Certificado";
+import CreateCertificado from "./pages/CreateCertificado";
+import UpdateCertificado from "./pages/UpdateCertificado";
 
 export default function Routes() {
   return (
@@ -44,6 +47,10 @@ export default function Routes() {
         <Route path="/turma" component={Turma} />
         <Route path="/create/turma" component={CreateTurma} /> 
         <Route path="/update/turma/:turmaId" component={UpdateTurma} />   
+
+        <Route path="/certificado" component={Certificado} />
+        <Route path="/create/certificado" component={CreateCertificado} /> 
+        <Route path="/update/certificado/:certificadoId" component={UpdateCertificado}/>
 
       </Switch>
     </BrowserRouter>

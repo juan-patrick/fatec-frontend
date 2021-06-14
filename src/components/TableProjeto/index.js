@@ -25,6 +25,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
 import api from "../../services/api";
+import moment from "moment"
 
 export default function Tableprojeto({ data, setData }) {
     const history = useHistory();
@@ -112,8 +113,8 @@ export default function Tableprojeto({ data, setData }) {
                 <DialogContent dividers>
                     <DialogContentText>
                     <Typography style={{wordWrap: "break-word"}}>Descrição do Projeto: {projetoToView.descricaoProjetos}</Typography><Divider />
-                        Data Inicial do projeto: {projetoToView.dataInicial} <Divider />
-                        Data Final do projeto: {projetoToView.dataFim} <Divider />
+                        Data Inicial do projeto: {moment(projetoToView.dataInicial).format('DD/MM/YYYY')} <Divider />
+                        Data Final do projeto: {moment(projetoToView.dataFim).format('DD/MM/YYYY')} <Divider />
                         Carga Horaria do projeto(h): {projetoToView.cargaHoraria}h <Divider />
                         Situação do projeto: {projetoToView.situacaoProjetos ? "Ativo" : "Inativo"}
                     </DialogContentText>
@@ -183,8 +184,8 @@ export default function Tableprojeto({ data, setData }) {
                         <TableRow key={projeto.id} >
                             <TableCell>{projeto.nomeProjetos}</TableCell>
                             <TableCell >{strslice(projeto.descricaoProjetos)}</TableCell>
-                            <TableCell>{projeto.dataInicial}</TableCell>
-                            <TableCell>{projeto.dataFim}</TableCell>
+                            <TableCell>{moment(projeto.dataInicial).format('DD/MM/YYYY')}</TableCell>
+                            <TableCell>{moment(projeto.dataFim).format('DD/MM/YYYY')}</TableCell>
                             <TableCell>{projeto.cargaHoraria}</TableCell>
                             <TableCell>{projeto.situacaoProjetos ? "Ativo" : "Inativo"}</TableCell>
                             <TableCell>
