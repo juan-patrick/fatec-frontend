@@ -12,11 +12,6 @@ import {
   Typography,
   Divider,
   TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
   CardActions,
   Button,
 } from "@material-ui/core";
@@ -27,35 +22,28 @@ import api from "../../services/api";
 
 export default function CreateCursoExtensao() {
   const history = useHistory();
-
-  const CursoExtesaoSchema = Yup.object().shape({
-    nome_extensao: Yup.string()
-      .min(3, "Nome muito pequeno.")
-      .max(45, "Nome é muito grande")
-      .required(),
-    tipo_extensao: Yup.string().max(45).required(),
-    status: Yup.bool(),
+  const CursoExtensaoSchema = Yup.object().shape({
+    tipoExtensao: Yup.string().required(),
+    nomeExtensao: Yup.string().required(),
   });
-
   const handleSubmit = async (values, resetForm) => {
     await api
-      .post("/cursoextensao", values)
+      .post("/cursoExtensao", values)
       .then(({ data }) => {
-        history.push("/cursos");
+        history.push("/cursoExtensao");
       })
       .catch((error) => {
         resetForm();
         console.log(error);
       });
   };
-
   return (
     <Page>
       <Grid container spacing={2}>
-        <Grid item container spacing={2}>
+        <Grid item container spacing={2} justify="center">
           <Grid item md={8} xs={12}>
             <Typography variant="h5" gutterBottom>
-              Cadastro de Cursos
+              Cadastro de Curso de Extensao
             </Typography>
           </Grid>
           <Grid item md={7} xs={12}>
@@ -63,18 +51,17 @@ export default function CreateCursoExtensao() {
               <CardHeader
                 title={
                   <Typography variant="h6">
-                    Formulário de Cadastro de Cursos
+                    Formulário de Cadastro de Curso de Extensao
                   </Typography>
                 }
               />
               <Divider />
               <Formik
                 initialValues={{
-                  nome_extensao: "",
-                  tipo_extensao: "",
-                  status: true,
+                  tipoExtensao: "",
+                  nomeExtensao: "",
                 }}
-                validationSchema={CursoExtesaoSchema}
+                validationSchema={CursoExtensaoSchema}
                 onSubmit={(values, { resetForm }) => {
                   handleSubmit(values, resetForm);
                 }}
@@ -85,63 +72,34 @@ export default function CreateCursoExtensao() {
                       <Grid container spacing={3}>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="nome_extensao"
-                            name="nome_extensao"
-                            label="Nome do Curso"
-                            variant="outlined"
-                            required
-                            value={values.nome_extensao}
+                            id="tipoExtensao"
+                            label="Tipo do curso de Extensao"
+                            InputLabelProps={{}}
                             onChange={handleChange}
-                            fullWidth
-                            error={errors.nome_extensao ? true : false}
-                            helperText={errors.nome_extensao}
+                            value={values.tipoExtensao}
                           />
                         </Grid>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="tipo_extensao"
-                            name="tipo_extensao"
-                            label="Tipo do Curso"
-                            variant="outlined"
-                            required
-                            value={values.tipo_extensao}
+                            id="nomeExtensao"
+                            label="Nome curso Extensão"
+                            InputLabelProps={{}}
                             onChange={handleChange}
-                            fullWidth
+                            value={values.nomeExtensao}
                           />
-                        </Grid>
-                        <Grid item md={12} xs={12}>
-                          <FormControl component="fieldset">
-                            <FormLabel component="legend">Status</FormLabel>
-                            <RadioGroup
-                              name="status"
-                              value={values.status}
-                              onChange={handleChange}
-                            >
-                              <FormControlLabel
-                                value="true"
-                                control={<Radio />}
-                                label="Ativo"
-                              />
-                              <FormControlLabel
-                                value="false"
-                                control={<Radio />}
-                                label="Inativo"
-                              />
-                            </RadioGroup>
-                          </FormControl>
                         </Grid>
                       </Grid>
                     </CardContent>
                     <Divider />
                     <CardActions>
-                      <Grid container item md={12} xs={12} justify="flex-end">
+                      <Grid container item md={12} xs={12} justify="center">
                         <Button
                           size="large"
                           color="primary"
                           variant="contained"
                           type="submit"
                         >
-                          Criar Curso
+                          Criar Curso de Extensao
                         </Button>
                       </Grid>
                     </CardActions>

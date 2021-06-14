@@ -1,24 +1,22 @@
+import React, { useState, useEffect } from "react";
 import Page from "../../components/Page";
-import TableCurso from "../../components/TableCurso";
+import { Grid, Typography, Button, Link } from "@material-ui/core";
 import api from "../../services/api";
-import { useEffect, useState } from "react";
-import { Grid, Button, Typography, Link } from "@material-ui/core";
+import TableDisciplina from "../../components/TableDisciplina";
 
-function Curso() {
-  const [cursos, setCursos] = useState([]);
-
-  const getCursos = async () => {
+function Disciplina() {
+  const [disciplina, setDisciplina] = useState([]);
+  const getDisciplina = async () => {
     await api
-      .get("/cursos")
+      .get("/disciplina")
       .then(({ data }) => {
-        setCursos(data);
+        setDisciplina(data);
         console.log(data);
       })
       .catch((error) => console.log(error));
   };
-
   useEffect(() => {
-    getCursos();
+    getDisciplina();
   }, []);
 
   return (
@@ -27,23 +25,22 @@ function Curso() {
         <Grid item container spacing={5} sm={12} justify="space-between">
           <Grid item sm={10} md={6} lg={6} xs={10}>
             <Typography variant="h5" gutterBottom fullWidth>
-              Lista de Cursos
+              Lista de Disciplinas
             </Typography>
           </Grid>
           <Grid item sm={2} md={6} lg={6} xs={2}>
-            <Link href="/create/cursos">
+            <Link href="/create/disciplina">
               <Button size="large" color="primary" variant="contained">
-                Adicionar Curso
+                Adicionar Disciplina
               </Button>
             </Link>
           </Grid>
         </Grid>
         <Grid item sm={12} md={12} xs={12}>
-          <TableCurso data={cursos} setData={getCursos} />
+          <TableDisciplina data={disciplina} setData={getDisciplina} />
         </Grid>
       </Grid>
     </Page>
   );
 }
-
-export default Curso;
+export default Disciplina;

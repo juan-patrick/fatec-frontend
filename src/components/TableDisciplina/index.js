@@ -25,28 +25,28 @@ import { useState } from "react";
 
 import api from "../../services/api";
 
-export default function Tableprojeto({ data, setData }) {
+export default function TableDisciplina({ data, setData }) {
   const history = useHistory();
 
   const [openDel, setOpenDel] = useState(false);
   const [openShow, setOpenShow] = useState(false);
-  const [projetoToDelete, setProjetoToDelete] = useState({});
-  const [projetoToView, setProjetoToView] = useState({});
+  const [disciplinaToDelete, setDisciplinaToDelete] = useState({});
+  const [disciplinaToView, setDisciplinaToView] = useState({});
 
   const handleCloseDialogDelete = () => {
     setOpenDel(false);
-    setProjetoToDelete({});
+    setDisciplinaToDelete({});
   };
   const handleCloseDialogView = () => {
     setOpenShow(false);
-    setProjetoToView({});
+    setDisciplinaToView({});
   };
-  const handleOpenDialogDelete = (projeto) => {
-    setProjetoToDelete(projeto);
+  const handleOpenDialogDelete = (disciplina) => {
+    setDisciplinaToDelete(disciplina);
     setOpenDel(true);
   };
-  const handleOpenDialogShow = (projeto) => {
-    setProjetoToView(projeto);
+  const handleOpenDialogShow = (disciplina) => {
+    setDisciplinaToView(disciplina);
     setOpenShow(true);
   };
   function strslice(str) {
@@ -55,9 +55,9 @@ export default function Tableprojeto({ data, setData }) {
     } else return str;
   }
 
-  const deleteProjeto = async (projetoId) => {
+  const deleteDisciplina = async (disciplinaId) => {
     await api
-      .delete(`/projeto/${projetoId}`)
+      .delete(`/disciplina/${disciplinaId}`)
       .then(({ data }) => {
         console.log(data);
         setData();
@@ -78,12 +78,13 @@ export default function Tableprojeto({ data, setData }) {
         disableEscapeKeyDown
         style={{ maxHeight: "90%" }}
       >
-        <DialogTitle>Você deseja deletar este projeto?</DialogTitle>
+        <DialogTitle>Você deseja deletar esta disciplina?</DialogTitle>
         <DialogContent dividers>
           <DialogContentText>
             {" "}
             Se você confirmar esta operação o projeto chamado:{" "}
-            <b>{projetoToDelete.nomeProjetos}</b> será deletado PERMANENTEMENTE
+            <b>{disciplinaToDelete.nomeDisciplina}</b> será deletado
+            PERMANENTEMENTE
           </DialogContentText>
           <DialogActions>
             <Grid container xs={12} md={12} spacing={4} justify="flex-end">
@@ -100,7 +101,7 @@ export default function Tableprojeto({ data, setData }) {
                 <Button
                   color="primary"
                   className={classes.buttonDelete}
-                  onClick={(e) => deleteProjeto(projetoToDelete.id)}
+                  onClick={(e) => deleteDisciplina(disciplinaToDelete.id)}
                 >
                   Deletar
                 </Button>
@@ -117,21 +118,29 @@ export default function Tableprojeto({ data, setData }) {
       >
         <DialogTitle>
           <Typography variant="h5" align="center">
-            {projetoToView.nomeProjetos}
+            {disciplinaToView.nomeDisciplina}
           </Typography>
         </DialogTitle>
         <DialogContent dividers>
           <DialogContentText>
             <Typography style={{ wordWrap: "break-word" }}>
-              Descrição do Projeto: {projetoToView.descricaoProjetos}
+              nome da disciplina: {disciplinaToView.nomeDisciplina}
             </Typography>
             <Divider />
-            Data Inicial do projeto: {projetoToView.dataInicial} <Divider />
-            Data Final do projeto: {projetoToView.dataFim} <Divider />
-            Carga Horaria do projeto(h): {projetoToView.cargaHoraria}h{" "}
+            Descrição da Disciplina: {
+              disciplinaToView.descricaoDisciplina
+            }h <Divider />
+            Carga Horaria do projeto(h): {disciplinaToView.cargaHoraria}h{" "}
             <Divider />
-            Situação do projeto:{" "}
-            {projetoToView.situacaoProjetos ? "Ativo" : "Inativo"}
+            Objetivo da Disciplina: {disciplinaToView.objetivoDisciplina}h{" "}
+            <Divider />
+            Ementa da Disciplina: {disciplinaToView.ementaDisciplina}h{" "}
+            <Divider />
+            Referência Básica da Disciplina:{" "}
+            {disciplinaToView.refenciaBasicaDisciplina}h <Divider />
+            Referência Complementar da Disciplina:{" "}
+            {disciplinaToView.refenciaComplementarDisciplina}h <Divider />
+            Codigo Siga: {disciplinaToView.codSigaDisciplina}h <Divider />
           </DialogContentText>
           <DialogActions>
             <Grid container xs={12} md={12} spacing={0} justify="center">
@@ -149,7 +158,7 @@ export default function Tableprojeto({ data, setData }) {
                   color="primary"
                   variant="contained"
                   onClick={(e) =>
-                    history.push(`/update/projeto/${projetoToView.id}`)
+                    history.push(`/update/disciplina/${disciplinaToView.id}`)
                   }
                 >
                   Alterar
@@ -164,22 +173,12 @@ export default function Tableprojeto({ data, setData }) {
           <TableRow>
             <TableCell>
               <Typography variant="subtitle1">
-                <b>Nome do Projeto</b>
+                <b>Nome da Disciplina</b>
               </Typography>
             </TableCell>
             <TableCell>
               <Typography variant="subtitle1">
-                <b>Descrição do Projeto</b>
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="subtitle1">
-                <b>Data Inicial do Projeto</b>
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="subtitle1">
-                <b>Data Final do Projeto</b>
+                <b>Descrição da Disciplina</b>
               </Typography>
             </TableCell>
             <TableCell>
@@ -187,9 +186,29 @@ export default function Tableprojeto({ data, setData }) {
                 <b>Carga Horaria do Projeto(h)</b>
               </Typography>
             </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1">
+                <b>Objetivo da Disciplina</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1">
+                <b>Ementa da Disciplina</b>
+              </Typography>
+            </TableCell>
             <TableCell colSpan={2}>
               <Typography variant="subtitle1">
-                <b>Situação</b>
+                <b>Referência Basica da Disciplina</b>
+              </Typography>
+            </TableCell>
+            <TableCell colSpan={2}>
+              <Typography variant="subtitle1">
+                <b>Referência Complementar da Disciplina</b>
+              </Typography>
+            </TableCell>
+            <TableCell colSpan={2}>
+              <Typography variant="subtitle1">
+                <b>Codigo Siga da Disciplina</b>
               </Typography>
             </TableCell>
             <TableCell colSpan={2}>
@@ -201,21 +220,23 @@ export default function Tableprojeto({ data, setData }) {
         </TableHead>
         <TableBody>
           {data &&
-            data.map((projeto) => (
-              <TableRow key={projeto.id}>
-                <TableCell>{projeto.nomeProjetos}</TableCell>
-                <TableCell>{strslice(projeto.descricaoProjetos)}</TableCell>
-                <TableCell>{projeto.dataInicial}</TableCell>
-                <TableCell>{projeto.dataFim}</TableCell>
-                <TableCell>{projeto.cargaHoraria}</TableCell>
+            data.map((disciplina) => (
+              <TableRow key={disciplina.id}>
+                <TableCell>{disciplina.nomeDisciplina}</TableCell>
                 <TableCell>
-                  {projeto.situacaoProjetos ? "Ativo" : "Inativo"}
+                  {strslice(disciplina.descricaoDisciplina)}
                 </TableCell>
+                <TableCell>{disciplina.cargaHoraria}</TableCell>
+                <TableCell>{disciplina.objetivoDisciplina}</TableCell>
+                <TableCell>{disciplina.ementaDisciplina}</TableCell>
+                <TableCell>{disciplina.refenciaBasicaDisciplina}</TableCell>
+                <TableCell>{disciplina.refenciaComplementarDisciplina}</TableCell>
+                <TableCell>{disciplina.codSigaDisciplina}</TableCell>
                 <TableCell>
                   <Button
                     variant="contained"
                     className={classes.buttonView}
-                    onClick={(e) => handleOpenDialogShow(projeto)}
+                    onClick={(e) => handleOpenDialogShow(disciplina)}
                   >
                     View
                   </Button>
@@ -224,7 +245,7 @@ export default function Tableprojeto({ data, setData }) {
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={(e) => handleOpenDialogDelete(projeto)}
+                    onClick={(e) => handleOpenDialogDelete(disciplina)}
                   >
                     Deletar
                   </Button>

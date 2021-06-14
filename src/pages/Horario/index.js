@@ -1,28 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Page from "../../components/Page";
-import { Formik, Form } from "formik";
-import { useHistory } from "react-router-dom";
 
 import {
-    Card,
-    CardHeader,
-    CardContent,
-    Grid,
+      Grid,
     Typography,
-    Divider,
-    TextField,
-    FormControl,
-    FormLabel,
-    RadioGroup,
-    FormControlLabel,
-    Radio,
-    CardActions,
-    Button,
+     Button,
     Link,
 } from "@material-ui/core";
-
-import * as Yup from "yup";
-
 import api from "../../services/api";
 import TableHorario from "../../components/TableHorario"
 

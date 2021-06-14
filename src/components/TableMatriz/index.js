@@ -25,39 +25,25 @@ import { useState } from "react";
 
 import api from "../../services/api";
 
-export default function Tableprojeto({ data, setData }) {
+export default function TableDisciplina({ data, setData }) {
   const history = useHistory();
 
   const [openDel, setOpenDel] = useState(false);
-  const [openShow, setOpenShow] = useState(false);
-  const [projetoToDelete, setProjetoToDelete] = useState({});
-  const [projetoToView, setProjetoToView] = useState({});
+  const [matrizToDelete, setMatrizToDelete] = useState({});
+  const [matrizToView, setMatrizToView] = useState({});
 
   const handleCloseDialogDelete = () => {
     setOpenDel(false);
-    setProjetoToDelete({});
+    setMatrizToDelete({});
   };
-  const handleCloseDialogView = () => {
-    setOpenShow(false);
-    setProjetoToView({});
-  };
-  const handleOpenDialogDelete = (projeto) => {
-    setProjetoToDelete(projeto);
+  const handleOpenDialogDelete = (matriz) => {
+    setMatrizToDelete(matriz);
     setOpenDel(true);
   };
-  const handleOpenDialogShow = (projeto) => {
-    setProjetoToView(projeto);
-    setOpenShow(true);
-  };
-  function strslice(str) {
-    if (str.length >= 50) {
-      return str.slice(0, 50) + "...";
-    } else return str;
-  }
 
-  const deleteProjeto = async (projetoId) => {
+  const deleteDisciplina = async (matrizId) => {
     await api
-      .delete(`/projeto/${projetoId}`)
+      .delete(`/matriz/${matrizId}`)
       .then(({ data }) => {
         console.log(data);
         setData();
@@ -78,12 +64,12 @@ export default function Tableprojeto({ data, setData }) {
         disableEscapeKeyDown
         style={{ maxHeight: "90%" }}
       >
-        <DialogTitle>Você deseja deletar este projeto?</DialogTitle>
+        <DialogTitle>Você deseja deletar esta matriz?</DialogTitle>
         <DialogContent dividers>
           <DialogContentText>
             {" "}
             Se você confirmar esta operação o projeto chamado:{" "}
-            <b>{projetoToDelete.nomeProjetos}</b> será deletado PERMANENTEMENTE
+            <b>{matrizToDelete.nomeDisciplina}</b> será deletado PERMANENTEMENTE
           </DialogContentText>
           <DialogActions>
             <Grid container xs={12} md={12} spacing={4} justify="flex-end">
@@ -100,59 +86,9 @@ export default function Tableprojeto({ data, setData }) {
                 <Button
                   color="primary"
                   className={classes.buttonDelete}
-                  onClick={(e) => deleteProjeto(projetoToDelete.id)}
+                  onClick={(e) => deleteDisciplina(matrizToDelete.id)}
                 >
                   Deletar
-                </Button>
-              </Grid>
-            </Grid>
-          </DialogActions>
-        </DialogContent>
-      </Dialog>
-      <Dialog
-        open={openShow}
-        disableBackdropClick
-        disableEscapeKeyDown
-        style={{ maxHeight: "90%" }}
-      >
-        <DialogTitle>
-          <Typography variant="h5" align="center">
-            {projetoToView.nomeProjetos}
-          </Typography>
-        </DialogTitle>
-        <DialogContent dividers>
-          <DialogContentText>
-            <Typography style={{ wordWrap: "break-word" }}>
-              Descrição do Projeto: {projetoToView.descricaoProjetos}
-            </Typography>
-            <Divider />
-            Data Inicial do projeto: {projetoToView.dataInicial} <Divider />
-            Data Final do projeto: {projetoToView.dataFim} <Divider />
-            Carga Horaria do projeto(h): {projetoToView.cargaHoraria}h{" "}
-            <Divider />
-            Situação do projeto:{" "}
-            {projetoToView.situacaoProjetos ? "Ativo" : "Inativo"}
-          </DialogContentText>
-          <DialogActions>
-            <Grid container xs={12} md={12} spacing={0} justify="center">
-              <Grid item>
-                <Button
-                  autoFocus
-                  color="primary"
-                  onClick={handleCloseDialogView}
-                >
-                  Cancelar
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  onClick={(e) =>
-                    history.push(`/update/projeto/${projetoToView.id}`)
-                  }
-                >
-                  Alterar
                 </Button>
               </Grid>
             </Grid>
@@ -164,67 +100,120 @@ export default function Tableprojeto({ data, setData }) {
           <TableRow>
             <TableCell>
               <Typography variant="subtitle1">
-                <b>Nome do Projeto</b>
+                <b>Descrição da Matriz</b>
               </Typography>
             </TableCell>
             <TableCell>
               <Typography variant="subtitle1">
-                <b>Descrição do Projeto</b>
+                <b>Ano da Matriz</b>
               </Typography>
             </TableCell>
             <TableCell>
               <Typography variant="subtitle1">
-                <b>Data Inicial do Projeto</b>
+                <b>Status da Matriz</b>
               </Typography>
             </TableCell>
             <TableCell>
               <Typography variant="subtitle1">
-                <b>Data Final do Projeto</b>
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography variant="subtitle1">
-                <b>Carga Horaria do Projeto(h)</b>
+                <b>Periodo Letivo</b>
               </Typography>
             </TableCell>
             <TableCell colSpan={2}>
               <Typography variant="subtitle1">
-                <b>Situação</b>
+                <b>Turno Funcionamento</b>
               </Typography>
             </TableCell>
             <TableCell colSpan={2}>
               <Typography variant="subtitle1">
-                <b>Ações</b>
+                <b>Prazo Integralizacao Minima</b>
+              </Typography>
+            </TableCell>
+            <TableCell colSpan={2}>
+              <Typography variant="subtitle1">
+                <b>Prazo Integralizacao Maxima</b>
+              </Typography>
+            </TableCell>
+            <TableCell colSpan={2}>
+              <Typography variant="subtitle1">
+                <b>Regime Matricula</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1">
+                <b>Competencia Especificas</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1">
+                <b>Competencias Gerais</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1">
+                <b>Competencia</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1">
+                <b>Forma de Acesso</b>
+              </Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1">
+                <b>Ementa da Matriz</b>
+              </Typography>
+            </TableCell>
+            <TableCell colSpan={2}>
+              <Typography variant="subtitle1">
+                <b>Eixo Tecnologico</b>
+              </Typography>
+            </TableCell>
+            <TableCell colSpan={2}>
+              <Typography variant="subtitle1">
+                <b>Perfil Profissional</b>
+              </Typography>
+            </TableCell>
+            <TableCell colSpan={2}>
+              <Typography variant="subtitle1">
+                <b>Areas de Atuacao</b>
               </Typography>
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data &&
-            data.map((projeto) => (
-              <TableRow key={projeto.id}>
-                <TableCell>{projeto.nomeProjetos}</TableCell>
-                <TableCell>{strslice(projeto.descricaoProjetos)}</TableCell>
-                <TableCell>{projeto.dataInicial}</TableCell>
-                <TableCell>{projeto.dataFim}</TableCell>
-                <TableCell>{projeto.cargaHoraria}</TableCell>
-                <TableCell>
-                  {projeto.situacaoProjetos ? "Ativo" : "Inativo"}
-                </TableCell>
+            data.map((matriz) => (
+              <TableRow key={matriz.id}>
+                <TableCell>{matriz.descricaoMatriz}</TableCell>
+                <TableCell>{matriz.anoMatriz}</TableCell>
+                <TableCell>{matriz.statusMatriz}</TableCell>
+                <TableCell>{matriz.duracaoHoraAula}</TableCell>
+                <TableCell>{matriz.periodoLetivo}</TableCell>
+                <TableCell>{matriz.turnoFuncionamento}</TableCell>
+                <TableCell>{matriz.prazoIntegralizacaoMin}</TableCell>
+                <TableCell>{matriz.prazoIntegralizacaoMax}</TableCell>
+                <TableCell>{matriz.regimeMatricula}</TableCell>
+                <TableCell>{matriz.competenciaEspecificas}</TableCell>
+                <TableCell>{matriz.competenciasGerais}</TableCell>
+                <TableCell>{matriz.competencia}</TableCell>
+                <TableCell>{matriz.formaAcesso}</TableCell>
+                <TableCell>{matriz.eixoTecnologico}</TableCell>
+                <TableCell>{matriz.perfilProfissional}</TableCell>
+                <TableCell>{matriz.areasAtuacao}</TableCell>
                 <TableCell>
                   <Button
+                    color="primary"
                     variant="contained"
-                    className={classes.buttonView}
-                    onClick={(e) => handleOpenDialogShow(projeto)}
+                    onClick={(e) => history.push(`/update/matriz/${matriz.id}`)}
                   >
-                    View
+                    Alterar
                   </Button>
                 </TableCell>
                 <TableCell>
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={(e) => handleOpenDialogDelete(projeto)}
+                    onClick={(e) => handleOpenDialogDelete(matriz)}
                   >
                     Deletar
                   </Button>

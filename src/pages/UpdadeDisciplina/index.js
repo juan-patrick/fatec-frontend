@@ -9,37 +9,29 @@ import {
   Typography,
   Divider,
   TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
   CardActions,
   Button,
   CircularProgress,
 } from "@material-ui/core";
 
 import * as Yup from "yup";
-
 import api from "../../services/api";
-
 import { useParams } from "react-router-dom";
-
 import { useEffect, useState } from "react";
 
-export default function UpdateProjeto() {
-  const { projetoId } = useParams();
+export default function UpdateDisciplina() {
+  const { disciplinaId } = useParams();
 
-  const [projeto, setProjeto] = useState({});
+  const [disciplina, setDisciplina] = useState({});
   const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
-  const getProjeto = async () => {
+  const getDisciplina = async () => {
     await api
-      .get(`/projeto/${projetoId}`)
+      .get(`/disciplina/${disciplinaId}`)
       .then(({ data }) => {
-        setProjeto(data);
+        setDisciplina(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -47,30 +39,31 @@ export default function UpdateProjeto() {
         history.goBack();
       });
   };
-
   useEffect(() => {
-    getProjeto();
+    getDisciplina();
   });
 
-  const ProjetoSchema = Yup.object().shape({
-    nomeProjetos: Yup.string()
+  const DisciplinaSchema = Yup.object().shape({
+    nomeDisciplina: Yup.string()
       .min(1, "Nome muito pequeno.")
       .max(255, "Nome muito grande")
       .required(),
-    descricaoProjetos: Yup.string()
+    descricaoDisciplina: Yup.string()
       .max(255, "Descrição muito grande")
       .required(),
-    cargaHoraria: Yup.number().required(),
-    situacaoProjetos: Yup.bool().required(),
-    dataInicial: Yup.date().required(),
-    dataFim: Yup.date().required(),
+    cargaHoraria: Yup.string().required(),
+    objetivoDisciplina: Yup.string().required(),
+    ementaDisciplina: Yup.string().required(),
+    refenciaBasicaDisciplina: Yup.string().required(),
+    refenciaComplementarDisciplina: Yup.string().required(),
+    codSigaDisciplina: Yup.string().required(),
   });
 
   const handleSubmit = async (values, resetForm) => {
     await api
-      .put(`/projeto/${projetoId}`, values)
+      .put(`/disciplina/${disciplinaId}`, values)
       .then(({ data }) => {
-        history.push("/projeto");
+        history.push("/disciplina");
       })
       .catch((error) => {
         resetForm();
@@ -84,7 +77,7 @@ export default function UpdateProjeto() {
         <Grid item container spacing={2}>
           <Grid item md={8} xs={12}>
             <Typography variant="h5" gutterBottom>
-              Alteração de Projetos
+              Alteração da Disciplina
             </Typography>
           </Grid>
           <Grid item md={7} xs={12}>
@@ -92,7 +85,7 @@ export default function UpdateProjeto() {
               <CardHeader
                 title={
                   <Typography variant="h6">
-                    Formulário de Alteração de Projetos
+                    Formulário de Alteração da Disciplina
                   </Typography>
                 }
               />
@@ -112,14 +105,18 @@ export default function UpdateProjeto() {
               ) : (
                 <Formik
                   initialValues={{
-                    nomeProjetos: projeto.nomeProjetos,
-                    descricaoProjetos: projeto.descricaoProjetos,
-                    dataInicial: projeto.dataInicial,
-                    dataFim: projeto.dataFim,
-                    cargaHoraria: projeto.cargaHoraria,
-                    situacaoProjetos: projeto.situacaoProjetos,
+                    nomeDisciplina: disciplina.nomeDisciplina,
+                    descricaoDisciplina: disciplina.descricaoDisciplina,
+                    cargaHoraria: disciplina.cargaHoraria,
+                    objetivoDisciplina: disciplina.objetivoDisciplina,
+                    ementaDisciplina: disciplina.ementaDisciplina,
+                    refenciaBasicaDisciplina:
+                      disciplina.refenciaBasicaDisciplina,
+                    refenciaComplementarDisciplina:
+                      disciplina.refenciaComplementarDisciplina,
+                    codSigaDisciplina: disciplina.codSigaDisciplina,
                   }}
-                  validationSchema={ProjetoSchema}
+                  validationSchema={DisciplinaSchema}
                   onSubmit={(values, { resetForm }) => {
                     handleSubmit(values, resetForm);
                   }}
@@ -130,28 +127,28 @@ export default function UpdateProjeto() {
                         <Grid container spacing={3}>
                           <Grid item md={12} xs={12}>
                             <TextField
-                              id="nomeProjetos"
-                              name="nomeProjetos"
-                              label="Nome do Projeto"
+                              id="nomeDisciplina"
+                              name="nomeDisciplina"
+                              label="Nome da Disciplina"
                               variant="outlined"
                               required
-                              value={values.nomeProjetos}
+                              value={values.nomeDisciplina}
                               onChange={handleChange}
-                              error={errors.nomeProjetos ? true : false}
-                              helperText={errors.nomeProjetos}
+                              error={errors.nomeDisciplina ? true : false}
+                              helperText={errors.nomeDisciplina}
                               fullWidth
                             />
                           </Grid>
                           <Grid item md={12} xs={12}>
                             <TextField
-                              id="descricaoProjetos"
-                              label="Descrição do Projeto"
+                              id="descricaoDisciplina"
+                              label="Descrição da Disciplina"
                               fullWidth
                               multiline
                               rowsMax={4}
                               variant="outlined"
                               onChange={handleChange}
-                              value={values.descricaoProjetos}
+                              value={values.descricaoDisciplina}
                             />
                           </Grid>
                           <Grid item md={12} xs={12}>
@@ -169,50 +166,39 @@ export default function UpdateProjeto() {
                           </Grid>
                           <Grid item md={12} xs={12}>
                             <TextField
-                              id="dataInicial"
-                              label="Data Inicial"
-                              type="date"
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
+                              id="objetivoDisciplina"
+                              label="Objetivo da Disciplina"
+                              fullWidth
+                              multiline
+                              rowsMax={4}
+                              variant="outlined"
                               onChange={handleChange}
-                              value={values.dataInicial}
+                              value={values.objetivoDisciplina}
                             />
                           </Grid>
                           <Grid item md={12} xs={12}>
                             <TextField
-                              id="dataFim"
-                              label="Data Final"
-                              type="date"
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
+                              id="ementaDisciplina"
+                              label="Ementa da Disciplina"
+                              fullWidth
+                              multiline
+                              rowsMax={4}
+                              variant="outlined"
                               onChange={handleChange}
-                              value={values.dataFim}
+                              value={values.ementaDisciplina}
                             />
                           </Grid>
                           <Grid item md={12} xs={12}>
-                            <FormControl component="fieldset">
-                              <FormLabel component="legend">
-                                situacaoProjetos
-                              </FormLabel>
-                              <RadioGroup
-                                name="situacaoProjetos"
-                                value={values.situacaoProjetos}
-                                onChange={handleChange}
-                              >
-                                <FormControlLabel
-                                  value="true"
-                                  control={<Radio />}
-                                  label="Ativo"
-                                />
-                                <FormControlLabel
-                                  value="false"
-                                  control={<Radio />}
-                                  label="Inativo"
-                                />
-                              </RadioGroup>
-                            </FormControl>
+                            <TextField
+                              id="refenciaBasicaDisciplina"
+                              label="Referência básica da Disciplina"
+                              fullWidth
+                              multiline
+                              rowsMax={4}
+                              variant="outlined"
+                              onChange={handleChange}
+                              value={values.refenciaBasicaDisciplina}
+                            />
                           </Grid>
                         </Grid>
                       </CardContent>
@@ -225,7 +211,7 @@ export default function UpdateProjeto() {
                             variant="contained"
                             type="submit"
                           >
-                            Alterar Projeto
+                            Alterar Disciplina
                           </Button>
                         </Grid>
                       </CardActions>

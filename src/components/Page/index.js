@@ -1,6 +1,6 @@
-import DrawerBar from '../../components/DrawerBar';
+import DrawerBar from "../../components/DrawerBar";
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 function Page({ children }) {
   const classes = useStyles();
@@ -17,25 +17,25 @@ function Page({ children }) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
   },
   toolbar: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
     padding: theme.spacing(1, 0),
     ...theme.mixins.toolbar,
   },
   content: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     padding: theme.spacing(2, 10, 2, 12),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(2, 0, 2, 6)
-    }
-  }
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(2, 0, 2, 6),
+    },
+  },
 }));
 
 export default Page;

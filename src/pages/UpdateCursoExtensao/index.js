@@ -1,9 +1,6 @@
 import Page from "../../components/Page";
-
 import { Formik, Form } from "formik";
-
 import { useHistory } from "react-router-dom";
-
 import {
   Card,
   CardHeader,
@@ -12,11 +9,6 @@ import {
   Typography,
   Divider,
   TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
   CardActions,
   Button,
   CircularProgress,
@@ -31,18 +23,18 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function UpdateCursoExtensao() {
-  const { cursoId } = useParams();
+  const { cursoExtensaoId } = useParams();
 
-  const [curso, setCurso] = useState({});
+  const [cursoExtensao, setCursoExtensao] = useState({});
   const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
-  const getCurso = async () => {
+  const getCursoExtensao = async () => {
     await api
-      .get(`/cursoextensao/${cursoId}`)
+      .get(`/cursoExtensao/${cursoExtensaoId}`)
       .then(({ data }) => {
-        setCurso(data);
+        setCursoExtensao(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -52,23 +44,22 @@ export default function UpdateCursoExtensao() {
   };
 
   useEffect(() => {
-    getCurso();
-  }, []);
+    getCursoExtensao();
+  });
 
   const CursoExtesaoSchema = Yup.object().shape({
-    nome_extensao: Yup.string()
+    nomeExtensao: Yup.string()
       .min(3, "Nome muito pequeno.")
       .max(45, "Nome é muito grande")
       .required(),
-    tipo_extensao: Yup.string().max(45).required(),
-    status: Yup.bool(),
+    tipoExtensao: Yup.string().max(45).required(),
   });
 
   const handleSubmit = async (values, resetForm) => {
     await api
-      .put(`/cursoextensao/${cursoId}`, values)
+      .put(`/cursoExtensao/${cursoExtensaoId}`, values)
       .then(({ data }) => {
-        history.push("/cursos");
+        history.push("/cursoExtensao");
       })
       .catch((error) => {
         resetForm();
@@ -82,7 +73,7 @@ export default function UpdateCursoExtensao() {
         <Grid item container spacing={2}>
           <Grid item md={8} xs={12}>
             <Typography variant="h5" gutterBottom>
-              Alteração de Cursos
+              Alteração do Curso de Extensão
             </Typography>
           </Grid>
           <Grid item md={7} xs={12}>
@@ -90,7 +81,7 @@ export default function UpdateCursoExtensao() {
               <CardHeader
                 title={
                   <Typography variant="h6">
-                    Formulário de Alteração de Cursos
+                    Formulário de Alteração do Curso de Extensão
                   </Typography>
                 }
               />
@@ -110,9 +101,9 @@ export default function UpdateCursoExtensao() {
               ) : (
                 <Formik
                   initialValues={{
-                    nome_extensao: curso.nome_extensao,
-                    tipo_extensao: curso.tipo_extensao,
-                    status: curso.status,
+                    nomeExtensao: cursoExtensao.nomeExtensao,
+                    tipoExtensao: cursoExtensao.tipoExtensao,
+                    status: cursoExtensao.Status,
                   }}
                   validationSchema={CursoExtesaoSchema}
                   onSubmit={(values, { resetForm }) => {
@@ -122,55 +113,32 @@ export default function UpdateCursoExtensao() {
                   {({ handleChange, values, errors }) => (
                     <Form>
                       <CardContent>
+                        <Grid item md={12} xs={12}>
+                          <TextField
+                            id="tipoExtensao"
+                            name="tipoExtensao"
+                            label="Tipo do Curso de extensão"
+                            variant="outlined"
+                            required
+                            value={values.tipoExtensao}
+                            onChange={handleChange}
+                            fullWidth
+                          />
+                        </Grid>
                         <Grid container spacing={3}>
                           <Grid item md={12} xs={12}>
                             <TextField
-                              id="nome_extensao"
-                              name="nome_extensao"
+                              id="nomeExtensao"
+                              name="nomeExtensao"
                               label="Nome do Curso"
                               variant="outlined"
                               required
-                              value={values.nome_extensao}
+                              value={values.nomeExtensao}
                               onChange={handleChange}
                               fullWidth
-                              error={errors.nome_extensao ? true : false}
-                              helperText={errors.nome_extensao}
+                              error={errors.nomeExtensao ? true : false}
+                              helperText={errors.nomeExtensao}
                             />
-                          </Grid>
-                          <Grid item md={12} xs={12}>
-                            <TextField
-                              id="tipo_extensao"
-                              name="tipo_extensao"
-                              label="Tipo do Curso"
-                              variant="outlined"
-                              required
-                              value={values.tipo_extensao}
-                              onChange={handleChange}
-                              fullWidth
-                            />
-                          </Grid>
-                          <Grid item md={12} xs={12}>
-                            <FormControl component="fieldset">
-                              <FormLabel component="legend">Status</FormLabel>
-                              <RadioGroup
-                                name="status"
-                                value={values.status}
-                                onChange={handleChange}
-                              >
-                                <FormControlLabel
-                                  value={true}
-                                  control={<Radio />}
-                                  label="Ativo"
-                                  checked={values.status}
-                                />
-                                <FormControlLabel
-                                  value={false}
-                                  control={<Radio />}
-                                  label="Inativo"
-                                  checked={!values.status}
-                                />
-                              </RadioGroup>
-                            </FormControl>
                           </Grid>
                         </Grid>
                       </CardContent>
@@ -183,7 +151,7 @@ export default function UpdateCursoExtensao() {
                             variant="contained"
                             type="submit"
                           >
-                            Alterar Curso
+                            Alterar Curso Extensão
                           </Button>
                         </Grid>
                       </CardActions>

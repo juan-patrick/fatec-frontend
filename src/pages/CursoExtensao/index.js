@@ -1,24 +1,24 @@
 import Page from "../../components/Page";
-import TableCursoExtensao from "../../components/TableCurso";
+import TableCursoExtensao from "../../components/TableCursoExtensao";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { Grid, Button, Typography, Link } from "@material-ui/core";
 
 function CursoExtensao() {
-  const [cursosExtensao, setCursosExtensao] = useState([]);
+  const [CursoExtensao, setCursoExtensao] = useState([]);
 
-  const getCursos = async () => {
+  const getCursoExtensao = async () => {
     await api
-      .get("/cursoextensao")
+      .get("/cursoExtensao")
       .then(({ data }) => {
-        setCursosExtensao(data);
+        setCursoExtensao(data);
         console.log(data);
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    getCursos();
+    getCursoExtensao();
   }, []);
 
   return (
@@ -31,15 +31,15 @@ function CursoExtensao() {
             </Typography>
           </Grid>
           <Grid item sm={2} md={6} lg={6} xs={2}>
-            <Link href="/create/cursos">
+            <Link href="/create/CursoExtensao">
               <Button size="large" color="primary" variant="contained">
-                Adicionar Curso
+                Adicionar Curso de Extensão
               </Button>
             </Link>
           </Grid>
         </Grid>
         <Grid item sm={12} md={12} xs={12}>
-          <TableCursoExtensao data={cursosExtensao} setData={getCursos} />
+          <TableCursoExtensao data={CursoExtensao} setData={getCursoExtensao} />
         </Grid>
       </Grid>
     </Page>

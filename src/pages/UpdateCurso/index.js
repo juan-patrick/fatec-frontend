@@ -19,7 +19,6 @@ import {
   Radio,
   CardActions,
   Button,
-  CircularProgress,
 } from "@material-ui/core";
 
 import * as Yup from "yup";
@@ -34,7 +33,7 @@ export default function UpdateCurso() {
   const { cursoId } = useParams();
 
   const [curso, setCurso] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [setLoading] = useState(true);
 
   const history = useHistory();
 
@@ -53,7 +52,7 @@ export default function UpdateCurso() {
 
   useEffect(() => {
     getCurso();
-  }, []);
+  });
 
   const CursoSchema = Yup.object().shape({
     nome_curso: Yup.string()
