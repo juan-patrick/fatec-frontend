@@ -36,11 +36,14 @@ import Matriz from "./pages/Matriz";
 import CreateMatriz from "./pages/CreateMatriz";
 import UpdateMatriz from "./pages/UpdateMatriz";
 
+import Login from "./pages/Login";
+
 export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={CursoExtensao} />
+        <Route path="/login" component={Login} />
         <Route path="/cursoExtensao" component={CursoExtensao} />
         <Route path="/create/cursoExtensao" component={CreateCursoExtensao} />
         <Route path="/update/cursoExtensao/:cursoExtensaoId" component={UpdateCursoExtensao}
@@ -63,8 +66,8 @@ export default function Routes() {
         <Route path="/update/horario/:horarioId" component={UpdateHorario} />
 
         <Route path="/turma" component={Turma} />
-        <Route path="/create/turma" component={CreateTurma} /> 
-        <Route path="/update/turma/:turmaId" component={UpdateTurma} /> 
+        <Route path="/create/turma" component={CreateTurma} />
+        <Route path="/update/turma/:turmaId" component={UpdateTurma} />
 
         <Route path="/professores" component={Professor} />
         <Route path="/create/professores" component={CreateProfessor} />
@@ -72,11 +75,11 @@ export default function Routes() {
 
         <Route path="/inatividades" component={Inatividade} />
         <Route path="/create/inatividades" component={CreateInatividade} />
-        <Route path="/update/inatividades/:inatividadeId" component={UpdateInatividade} /> 
+        <Route path="/update/inatividades/:inatividadeId" component={UpdateInatividade} />
 
         <Route path="/vinculos" component={Vinculo} />
         <Route path="/create/vinculos" component={CreateVinculo} />
-        <Route path="/update/vinculos/:vinculoId" component={UpdateVinculo} />  
+        <Route path="/update/vinculos/:vinculoId" component={UpdateVinculo} />
 
         <Route path="/disciplina" component={Disciplina} />
         <Route path="/create/disciplina" component={CreateDisciplina} />
