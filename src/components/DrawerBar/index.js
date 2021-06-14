@@ -159,8 +159,8 @@ export default function DrawerBar() {
           </ListItem>
           <ListItem
             button
-            key="cursos-extensao"
-            onClick={(e) => history.push("/cursos-extensao")}
+            key="cursosExtensao"
+            onClick={(e) => history.push("/cursosExtensao")}
           >
             <ListItemIcon>
               <Extension />

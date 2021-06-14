@@ -31,9 +31,7 @@ export default function Routes() {
         <Route path="/" exact component={CursoExtensao} />
         <Route path="/cursoExtensao" component={CursoExtensao} />
         <Route path="/create/cursoExtensao" component={CreateCursoExtensao} />
-        <Route
-          path="/update/cursoExtensao/:cursoExtensaoId"
-          component={UpdateCursoExtensao}
+        <Route path="/update/cursoExtensao/:cursoExtensaoId" component={UpdateCursoExtensao}
         />
 
         <Route path="/cursos" component={Curso} />

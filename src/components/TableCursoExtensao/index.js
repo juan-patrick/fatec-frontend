@@ -128,9 +128,7 @@ export default function TableCursoExtensao({ data, setData }) {
             </Typography>
             <Divider />
             Tipo do curso de extensão: {cursoExtensaoToView.tipoExtensao}{" "}
-            <Divider />
-            Situação do projeto:{" "}
-            {cursoExtensaoToView.status ? "Ativo" : "Inativo"}
+     
           </DialogContentText>
           <DialogActions>
             <Grid container xs={12} md={12} spacing={0} justify="center">
@@ -175,7 +173,6 @@ export default function TableCursoExtensao({ data, setData }) {
             </TableCell>
             <TableCell>
               <Typography variant="subtitle1">
-                <b>Status</b>
               </Typography>
             </TableCell>
             <TableCell colSpan={2}>
@@ -190,10 +187,7 @@ export default function TableCursoExtensao({ data, setData }) {
             data.map((cursoExtensao) => (
               <TableRow key={cursoExtensao.id}>
                 <TableCell>{cursoExtensao.nomeExtensao}</TableCell>
-                <TableCell>{strslice(cursoExtensao.tipoExtensao)}</TableCell>
-                <TableCell>
-                  {cursoExtensao.status ? "Ativo" : "Inativo"}
-                </TableCell>
+                <TableCell>{strslice(cursoExtensao.tipoExtensao)}</TableCell>                            
                 <TableCell>
                   <Button
                     variant="contained"
