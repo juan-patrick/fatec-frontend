@@ -17,6 +17,12 @@ import UpdateHorario from "./pages/UpdateHorario";
 import Turma from "./pages/Turma";
 import CreateTurma from "./pages/CreateTurma";
 import UpdateTurma from "./pages/UpdateTurma";
+import Area from "./pages/Area";
+import CreateArea from "./pages/CreateArea";
+import UpdateArea from "./pages/UpdateArea";
+import Eventos from "./pages/Eventos";
+import CreateEventos from "./pages/CreateEventos";
+import UpdateEventos from "./pages/UpdateEventos";
 
 export default function Routes() {
   return (
@@ -44,6 +50,15 @@ export default function Routes() {
         <Route path="/turma" component={Turma} />
         <Route path="/create/turma" component={CreateTurma} /> 
         <Route path="/update/turma/:turmaId" component={UpdateTurma} />   
+
+        <Route path="/area" component={Area} />
+        <Route path="/create/area" component={CreateArea}/>
+        <Route path="/update/area/:areaId" component={UpdateArea}/>
+
+        <Route path="/eventos" component={Eventos}/>
+        <Route path="/create/eventos" component={CreateEventos}/>
+        <Route path="/update/eventos/:eventosId" component={UpdateEventos}/>
+
 
       </Switch>
     </BrowserRouter>
