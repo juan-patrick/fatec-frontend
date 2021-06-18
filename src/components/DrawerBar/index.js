@@ -206,6 +206,20 @@ export default function DrawerBar() {
           </ListItem>
         </List>
 
+        <ListItem button key="Semana" onClick={(e) => history.push('/semana')}>
+            <ListItemIcon>
+              <CalendarViewDayOutlined />
+            </ListItemIcon>
+            <ListItemText primary="Semana" />
+          </ListItem>
+
+          <ListItem button key="Periodo" onClick={(e) => history.push('/periodo')}>
+            <ListItemIcon>
+              <AccessAlarm />
+            </ListItemIcon>
+            <ListItemText primary="Periodo" />
+          </ListItem>
+
         <List className={classes.last}>
           <ListItem button key="logout">
             <ListItemIcon></ListItemIcon>

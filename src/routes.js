@@ -37,6 +37,10 @@ import CreateMatriz from "./pages/CreateMatriz";
 import UpdateMatriz from "./pages/UpdateMatriz";
 
 import Login from "./pages/Login";
+// GRUPO 4
+import { ListSemana, CreateSemana, UpdateSemana } from "./pages/Semana"
+import { ListPeriodo, CreatePeriodo, UpdatePeriodo } from "./pages/Periodo"
+
 
 export default function Routes() {
   return (
@@ -80,6 +84,16 @@ export default function Routes() {
         <Route path="/vinculos" component={Vinculo} />
         <Route path="/create/vinculos" component={CreateVinculo} />
         <Route path="/update/vinculos/:vinculoId" component={UpdateVinculo} />
+        <Route path="/update/vinculos/:vinculoId" component={UpdateVinculo} />
+        <Route path="/update/turma/:turmaId" component={UpdateTurma} />
+
+        <Route path="/semana" component={ListSemana} />
+        <Route path="/create/semana" component={CreateSemana} />
+        <Route path="/update/semana/:semanaId" component={UpdateSemana} />
+
+        <Route path="/periodo" component={ListPeriodo} />
+        <Route path="/create/periodo" component={CreatePeriodo} />
+        <Route path="/update/periodo/:periodoId" component={UpdatePeriodo} />
 
         <Route path="/disciplina" component={Disciplina} />
         <Route path="/create/disciplina" component={CreateDisciplina} />
