@@ -30,6 +30,8 @@ import {
   SupervisedUserCircle,
   WorkOff,
   HowToReg,
+  CalendarViewDayOutlined,
+  AccessAlarm,
 } from "@material-ui/icons";
 
 import clsx from "clsx";
