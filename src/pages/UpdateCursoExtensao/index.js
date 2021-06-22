@@ -45,7 +45,7 @@ export default function UpdateCursoExtensao() {
 
   useEffect(() => {
     getCursoExtensao();
-  });
+  },[]);
 
   const CursoExtesaoSchema = Yup.object().shape({
     nomeExtensao: Yup.string()

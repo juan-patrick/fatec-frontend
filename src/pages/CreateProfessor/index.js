@@ -24,6 +24,7 @@ import {
 import * as Yup from "yup";
 
 import api from "../../services/api";
+import { getCEP } from "../../services/brasilAPI";
 
 export default function CreateProfessor() {
   const history = useHistory();
@@ -70,8 +71,8 @@ export default function CreateProfessor() {
               <Divider />
               <Formik
                 initialValues={{
-                  nome_professor: "",
-                  email_professor: "",
+                  nomeProfessor: "",
+                  emailProfessor: "",
                   status: true,
                 }}
                 validationSchema={ProfessorSchema}
@@ -85,26 +86,27 @@ export default function CreateProfessor() {
                       <Grid container spacing={3}>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="nome_professor"
-                            name="nome_professor"
+                            id="nomeProfessor"
+                            name="nomeProfessor"
                             label="Nome do Professor"
                             variant="outlined"
                             required
-                            value={values.nome_professor}
-                            onChange={handleChange}
+                            value={values.nomeProfessor}
+                            onBlur = {getCEP(values.nomeProfessor)}
+                            //onChange={handleChange}
                             fullWidth
-                            error={errors.nome_professor ? true : false}
-                            helperText={errors.nome_professor}
+                            error={errors.nomeProfessor ? true : false}
+                            helperText={errors.nomeProfessor}
                           />
                         </Grid>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="email_professor"
-                            name="email_professor"
+                            id="emailProfessor"
+                            name="emailProfessor"
                             label="Email do Professor"
                             variant="outlined"
                             required
-                            value={values.email_professor}
+                            value={values.emailProfessor}
                             onChange={handleChange}
                             fullWidth
                           />

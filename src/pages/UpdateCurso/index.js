@@ -39,7 +39,7 @@ export default function UpdateCurso() {
 
   const getCurso = async () => {
     await api
-      .get(`/cursos/${cursoId}`)
+      .get(`/curso/${cursoId}`)
       .then(({ data }) => {
         setCurso(data);
         setLoading(false);
@@ -52,23 +52,23 @@ export default function UpdateCurso() {
 
   useEffect(() => {
     getCurso();
-  });
+  },[]);
 
   const CursoSchema = Yup.object().shape({
-    nome_curso: Yup.string()
+    nomeCurso: Yup.string()
       .min(3, "Nome muito pequeno.")
       .max(45, "Nome é muito grande")
       .required(),
-    descricao_curso: Yup.string().max(45).required(),
-    duracao_curso: Yup.number().required(),
-    situacao_curso: Yup.bool(),
-    cod_mec: Yup.string().max(45).required(),
+    descricaoCurso: Yup.string().max(45).required(),
+    duracaoCurso: Yup.number().required(),
+    situacaoCurso: Yup.bool(),
+    codMec: Yup.string().max(45).required(),
   });
   const handleSubmit = async (values, resetForm) => {
     await api
-      .put(`/cursoextensao/${cursoId}`, values)
+      .put(`/curso/${cursoId}`, values)
       .then(({ data }) => {
-        history.push("/cursos");
+        history.push("/curso");
       })
       .catch((error) => {
         resetForm();
@@ -97,11 +97,11 @@ export default function UpdateCurso() {
               <Divider />
               <Formik
                 initialValues={{
-                  nome_curso: curso.nome_curso,
-                  descricao_curso: curso.descricao_curso,
-                  duracao_curso: curso.duracao_curso,
-                  situacao_curso: curso.situacao_curso,
-                  cod_mec: curso.cod_mec,
+                  nomeCurso: curso.nomeCurso,
+                  descricaoCurso: curso.descricaoCurso,
+                  duracaoCurso: curso.duracaoCurso,
+                  situacaoCurso: curso.situacaoCurso,
+                  codMec: curso.codMec,
                 }}
                 validationSchema={CursoSchema}
                 onSubmit={(values, { resetForm }) => {
@@ -114,50 +114,50 @@ export default function UpdateCurso() {
                       <Grid container spacing={3}>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="nome_curso"
-                            name="nome_curso"
+                            id="nomeCurso"
+                            name="nomeCurso"
                             label="Nome do Curso"
                             variant="outlined"
                             required
-                            value={values.nome_curso}
+                            value={values.nomeCurso}
                             onChange={handleChange}
                             fullWidth
-                            error={errors.nome_curso ? true : false}
-                            helperText={errors.nome_curso}
+                            error={errors.nomeCurso ? true : false}
+                            helperText={errors.nomeCurso}
                           />
                         </Grid>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="duracao_curso"
-                            name="duracao_curso"
+                            id="duracaoCurso"
+                            name="duracaoCurso"
                             label="Duraçao do Curso"
                             variant="outlined"
                             required
-                            value={values.duracao_curso}
+                            value={values.duracaoCurso}
                             onChange={handleChange}
                             fullWidth
                           />
                         </Grid>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="descricao_curso"
-                            name="descricao_curso"
+                            id="descricaoCurso"
+                            name="descricaoCurso"
                             label="Descrição do Curso"
                             variant="outlined"
                             required
-                            value={values.descricao_curso}
+                            value={values.descricaoCurso}
                             onChange={handleChange}
                             fullWidth
                           />
                         </Grid>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="cod_mec"
-                            name="cod_mec"
+                            id="codMec"
+                            name="codMec"
                             label="Código MEC"
                             variant="outlined"
                             required
-                            value={values.cod_mec}
+                            value={values.codMec}
                             onChange={handleChange}
                             fullWidth
                           />
@@ -167,7 +167,7 @@ export default function UpdateCurso() {
                             <FormLabel component="legend">Status</FormLabel>
                             <RadioGroup
                               name="status"
-                              value={values.situacao_curso}
+                              value={values.situacaoCurso}
                               onChange={handleChange}
                             >
                               <FormControlLabel

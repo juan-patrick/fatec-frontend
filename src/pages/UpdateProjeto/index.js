@@ -50,7 +50,7 @@ export default function UpdateProjeto() {
 
   useEffect(() => {
     getProjeto();
-  });
+  },[]);
 
   const ProjetoSchema = Yup.object().shape({
     nomeProjetos: Yup.string()

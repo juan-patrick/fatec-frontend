@@ -53,9 +53,9 @@ export default function Routes() {
         <Route path="/update/cursoExtensao/:cursoExtensaoId" component={UpdateCursoExtensao}
         />
 
-        <Route path="/cursos" component={Curso} />
-        <Route path="/create/cursos" component={CreateCurso} />
-        <Route path="/update/cursos/:cursoId" component={UpdateCurso} />
+        <Route path="/curso" component={Curso} />
+        <Route path="/create/curso" component={CreateCurso} />
+        <Route path="/update/curso/:cursoId" component={UpdateCurso} />
 
         <Route path="/projeto" component={Projeto} />
         <Route path="/create/projeto" component={CreateProjeto} />

@@ -42,7 +42,7 @@ export default function TableCurso({ data, setData }) {
 
   const deleteCurso = async (cursoId) => {
     await api
-      .delete(`/cursos/${cursoId}`)
+      .delete(`/curso/${cursoId}`)
       .then(({ data }) => {
         console.log(data);
         setData();
@@ -66,14 +66,8 @@ export default function TableCurso({ data, setData }) {
         <DialogTitle>Você deseja realmente deletar este curso?</DialogTitle>
         <DialogContent dividers>
           <DialogContentText>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. A
-            voluptatem voluptas consequuntur adipisci soluta fuga molestias
-            voluptate praesentium, distinctio nesciunt nam veniam repudiandae
-            sint mollitia illum veritatis ipsa ratione deleniti!
-          </DialogContentText>
-          <DialogContentText>
             <b>
-              O curso que será removido é: {cursoToDelete.nome_extensao || ""}
+              O curso que será removido é: {cursoToDelete.nomeCurso || ""}
             </b>
           </DialogContentText>
           <DialogActions>
@@ -135,18 +129,18 @@ export default function TableCurso({ data, setData }) {
           {data &&
             data.map((curso) => (
               <TableRow key={curso.id}>
-                <TableCell>{curso.nome_curso}</TableCell>
-                <TableCell>{curso.descricao_curso}</TableCell>
-                <TableCell>{curso.duracao_curso}h</TableCell>
-                <TableCell>{curso.cod_mec}</TableCell>
+                <TableCell>{curso.nomeCurso}</TableCell>
+                <TableCell>{curso.descricaoCurso}</TableCell>
+                <TableCell>{curso.duracaoCurso}h</TableCell>
+                <TableCell>{curso.codMec}</TableCell>
                 <TableCell>
-                  {curso.situacao_curso ? "Ativo" : "Desativado"}
+                  {curso.situacaoCurso ? "Ativo" : "Desativado"}
                 </TableCell>
                 <TableCell>
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={(e) => history.push(`/update/cursos/${curso.id}`)}
+                    onClick={(e) => history.push(`/update/curso/${curso.id}`)}
                   >
                     Alterar
                   </Button>
