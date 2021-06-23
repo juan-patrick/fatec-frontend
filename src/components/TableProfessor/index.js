@@ -48,7 +48,7 @@ export default function TableProfessor({ data, setData }) {
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. A voluptatem voluptas consequuntur adipisci soluta fuga molestias voluptate praesentium, distinctio nesciunt nam veniam repudiandae sint mollitia illum veritatis ipsa ratione deleniti!
           </DialogContentText>
           <DialogContentText>
-            <b>O professor que será removido é: {professorToDelete.nome_professor || ''}</b>
+            <b>O professor que será removido é: {professorToDelete.nomeProfessor || ''}</b>
           </DialogContentText>
           <DialogActions>
             <Grid container item xs={12} md={12} spacing={4} justify="flex-end">

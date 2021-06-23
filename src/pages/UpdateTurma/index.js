@@ -48,7 +48,7 @@ export default function UpdateTurma() {
 
   useEffect(() => {
     getTurma();
-  });
+  },[]);
   const TurmaSchema = Yup.object().shape({
     nomeTurma: Yup.string().max(20, "Nome da turma maior que o limite"),
   });

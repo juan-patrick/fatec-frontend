@@ -9,7 +9,7 @@ function Curso() {
 
   const getCursos = async () => {
     await api
-      .get("/cursos")
+      .get("/curso")
       .then(({ data }) => {
         setCursos(data);
         console.log(data);
@@ -31,7 +31,7 @@ function Curso() {
             </Typography>
           </Grid>
           <Grid item sm={2} md={6} lg={6} xs={2}>
-            <Link href="/create/cursos">
+            <Link href="/create/curso">
               <Button size="large" color="primary" variant="contained">
                 Adicionar Curso
               </Button>

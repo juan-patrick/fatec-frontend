@@ -136,11 +136,11 @@ export default function DrawerBar() {
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button key="curso" onClick={(e) => history.push("/cursos")}>
+          <ListItem button key="curso" onClick={(e) => history.push("/curso")}>
             <ListItemIcon>
               <MenuBook />
             </ListItemIcon>
-            <ListItemText primary="Cursos" />
+            <ListItemText primary="Curso" />
           </ListItem>
           <ListItem
             button
@@ -164,13 +164,13 @@ export default function DrawerBar() {
           </ListItem>
           <ListItem
             button
-            key="cursosExtensao"
-            onClick={(e) => history.push("/cursosExtensao")}
+            key="cursoExtensao"
+            onClick={(e) => history.push("/cursoExtensao")}
           >
             <ListItemIcon>
               <Extension />
             </ListItemIcon>
-            <ListItemText primary="Cursos Extensão" />
+            <ListItemText primary="Cursos de Extensão" />
           </ListItem>
           <ListItem
             button

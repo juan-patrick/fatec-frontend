@@ -48,7 +48,7 @@ export default function UpdateHorario() {
 
   useEffect(() => {
     getHorario();
-  });
+  },[]);
   const HorarioSchema = Yup.object().shape({
     HorarioInicial: Yup.string().required(),
     HorarioFinal: Yup.string().required(),
