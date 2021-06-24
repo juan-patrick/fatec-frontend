@@ -45,10 +45,10 @@ export default function TableInatividade({ data, setData }) {
         </DialogTitle>
         <DialogContent dividers>
           <DialogContentText>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. A voluptatem voluptas consequuntur adipisci soluta fuga molestias voluptate praesentium, distinctio nesciunt nam veniam repudiandae sint mollitia illum veritatis ipsa ratione deleniti!
+            Se você confirma esta operação o registro desta inatividade será deletado PERMANENTEMENTE
           </DialogContentText>
           <DialogContentText>
-            <b>A inatividade que será removida é: {inatividadeToDelete.nome_inatividade || ''}</b>
+            <b>A inatividade que será removida é: {inatividadeToDelete.motivo || ''}</b>
           </DialogContentText>
           <DialogActions>
             <Grid container item xs={12} md={12} spacing={4} justify="flex-end">
@@ -70,14 +70,17 @@ export default function TableInatividade({ data, setData }) {
         <TableHead>
           <TableRow>
             <TableCell>
-              <Typography variant="subtitle1"><b>Nome</b></Typography>
+              <Typography variant="subtitle1"><b>Motivo da Inatividade</b></Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1"><b>Data de Início</b></Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1"><b>Data fim</b></Typography>
             </TableCell>
             <TableCell>
               <Typography variant="subtitle1"><b>Status</b>
               </Typography>
-            </TableCell>
-            <TableCell colSpan={2}>
-              <Typography variant="subtitle1"><b>Ações</b></Typography>
             </TableCell>
           </TableRow>
 
@@ -86,7 +89,13 @@ export default function TableInatividade({ data, setData }) {
           {data && data.map(inatividade => (
             <TableRow key={inatividade.id}>
               <TableCell>
-                {inatividade.nome_inatividade}
+                {inatividade.motivo}
+              </TableCell>
+              <TableCell>
+                {inatividade.dataInicio}
+              </TableCell>
+              <TableCell>
+                {inatividade.dataFim}
               </TableCell>
               <TableCell>
               <Button variant="contained" color="primary"

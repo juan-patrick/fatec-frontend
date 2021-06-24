@@ -39,7 +39,7 @@ export default function UpdateVinculo() {
 
 
   const VinculoSchema = Yup.object().shape({
-    nome_vinculo: Yup.string().min(3, 'Nome muito pequeno.').max(45, 'Nome é muito grande').required(),
+    tipoVinculo: Yup.string().min(3, "Nome muito pequeno.").max(45, "Nome é muito grande").required(),
     status: Yup.bool(),
   });
 
@@ -66,7 +66,7 @@ export default function UpdateVinculo() {
               {loading ?
                 <Grid container item md={12} xs={12} justify="center" alignItems="center" style={{ minHeight: 300 }}>
                   <CircularProgress />
-                </Grid> : <Formik initialValues={{ nome_vinculo: vinculo.nome_vinculo }} validationSchema={VinculoSchema} onSubmit={(values, { resetForm }) => {
+                </Grid> : <Formik initialValues={{ tipoVinculo: vinculo.tipoVinculo }} validationSchema={VinculoSchema} onSubmit={(values, { resetForm }) => {
                   handleSubmit(values, resetForm);
                 }}>
                   {({ handleChange, values, errors }) => (
@@ -74,7 +74,7 @@ export default function UpdateVinculo() {
                       <CardContent>
                         <Grid container spacing={3}>
                           <Grid item md={12} xs={12}>
-                            <TextField id="nome_vinculo" name="nome_vinculo" label="Nome do Vinculo" variant="outlined" required value={values.nome_vinculo} onChange={handleChange} fullWidth error={errors.nome_vinculo ? true : false} helperText={errors.nome_vinculo} />
+                            <TextField id="tipoVinculo" name="tipoVinculo" label="Tipo do Vinculo" variant="outlined" required value={values.tipoVinculo} onChange={handleChange} fullWidth error={errors.tipoVinculo ? true : false} helperText={errors.tipoVinculo} />
                           </Grid>
                           <Grid item md={12} xs={12}>
                             <FormControl component="fieldset">
