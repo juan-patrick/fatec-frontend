@@ -59,7 +59,7 @@ export default function TableSemana({ data, setData }) {
                 disableBackdropClick
                 disableEscapeKeyDown
                 style={{ maxHeight: "90%" }}>
-                <DialogTitle>Você deseja deletar este semna?</DialogTitle>
+                <DialogTitle>Você deseja deletar este semana?</DialogTitle>
                 <DialogContent dividers>
                     <DialogContentText> Se você confirmar esta operação o semana será deletado PERMANENTEMENTE</DialogContentText>
                     <DialogActions>
