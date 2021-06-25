@@ -5,20 +5,20 @@ import { useEffect, useState } from "react";
 import { Grid, Button, Typography, Link } from "@material-ui/core";
 
 function Curso() {
-  const [cursos, setCursos] = useState([]);
+  const [curso, setCurso] = useState([]);
 
-  const getCursos = async () => {
+  const getCurso = async () => {
     await api
       .get("/curso")
       .then(({ data }) => {
-        setCursos(data);
+        setCurso(data);
         console.log(data);
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    getCursos();
+    getCurso();
   }, []);
 
   return (
@@ -27,7 +27,7 @@ function Curso() {
         <Grid item container spacing={5} sm={12} justify="space-between">
           <Grid item sm={10} md={6} lg={6} xs={10}>
             <Typography variant="h5" gutterBottom fullWidth>
-              Lista de Cursos
+              Lista de Curso
             </Typography>
           </Grid>
           <Grid item sm={2} md={6} lg={6} xs={2}>
@@ -39,7 +39,7 @@ function Curso() {
           </Grid>
         </Grid>
         <Grid item sm={12} md={12} xs={12}>
-          <TableCurso data={cursos} setData={getCursos} />
+          <TableCurso data={curso} setData={getCurso} />
         </Grid>
       </Grid>
     </Page>

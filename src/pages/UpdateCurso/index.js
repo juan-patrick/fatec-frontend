@@ -1,9 +1,6 @@
 import Page from "../../components/Page";
-
 import { Formik, Form } from "formik";
-
 import { useHistory } from "react-router-dom";
-
 import {
   Card,
   CardHeader,
@@ -19,6 +16,7 @@ import {
   Radio,
   CardActions,
   Button,
+  CircularProgress,
 } from "@material-ui/core";
 
 import * as Yup from "yup";
@@ -33,7 +31,7 @@ export default function UpdateCurso() {
   const { cursoId } = useParams();
 
   const [curso, setCurso] = useState({});
-  const [setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
@@ -56,14 +54,21 @@ export default function UpdateCurso() {
 
   const CursoSchema = Yup.object().shape({
     nomeCurso: Yup.string()
-      .min(3, "Nome muito pequeno.")
-      .max(45, "Nome é muito grande")
+      .min(1, "Nome muito pequeno.")
+      .max(255, "Nome muito grande")
       .required(),
-    descricaoCurso: Yup.string().max(45).required(),
-    duracaoCurso: Yup.number().required(),
-    situacaoCurso: Yup.bool(),
-    codMec: Yup.string().max(45).required(),
+      duracaoCurso: Yup.number().required(),
+    descricaoCurso: Yup.string()
+    .min(1, "Nome muito pequeno.")
+    .max(255, "Nome muito grande")
+    .required(),
+    situacaoCurso: Yup.bool().required(),
+    codMec: Yup.string()
+    .min(1, "Nome muito pequeno.")
+    .max(255, "Nome muito grande")
+    .required(),
   });
+
   const handleSubmit = async (values, resetForm) => {
     await api
       .put(`/curso/${cursoId}`, values)
@@ -82,7 +87,7 @@ export default function UpdateCurso() {
         <Grid item container spacing={2}>
           <Grid item md={8} xs={12}>
             <Typography variant="h5" gutterBottom>
-              Cadastro de Cursos
+              Alteração do Curso
             </Typography>
           </Grid>
           <Grid item md={7} xs={12}>
@@ -90,117 +95,134 @@ export default function UpdateCurso() {
               <CardHeader
                 title={
                   <Typography variant="h6">
-                    Formulário de Cadastro de Cursos
+                    Formulário de Alteração do Curso
                   </Typography>
                 }
               />
               <Divider />
-              <Formik
-                initialValues={{
-                  nomeCurso: curso.nomeCurso,
-                  descricaoCurso: curso.descricaoCurso,
-                  duracaoCurso: curso.duracaoCurso,
-                  situacaoCurso: curso.situacaoCurso,
-                  codMec: curso.codMec,
-                }}
-                validationSchema={CursoSchema}
-                onSubmit={(values, { resetForm }) => {
-                  handleSubmit(values, resetForm);
-                }}
-              >
-                {({ handleChange, values, errors }) => (
-                  <Form>
-                    <CardContent>
-                      <Grid container spacing={3}>
-                        <Grid item md={12} xs={12}>
-                          <TextField
-                            id="nomeCurso"
-                            name="nomeCurso"
-                            label="Nome do Curso"
-                            variant="outlined"
-                            required
-                            value={values.nomeCurso}
-                            onChange={handleChange}
-                            fullWidth
-                            error={errors.nomeCurso ? true : false}
-                            helperText={errors.nomeCurso}
-                          />
-                        </Grid>
-                        <Grid item md={12} xs={12}>
-                          <TextField
-                            id="duracaoCurso"
-                            name="duracaoCurso"
-                            label="Duraçao do Curso"
-                            variant="outlined"
-                            required
-                            value={values.duracaoCurso}
-                            onChange={handleChange}
-                            fullWidth
-                          />
-                        </Grid>
-                        <Grid item md={12} xs={12}>
-                          <TextField
-                            id="descricaoCurso"
-                            name="descricaoCurso"
-                            label="Descrição do Curso"
-                            variant="outlined"
-                            required
-                            value={values.descricaoCurso}
-                            onChange={handleChange}
-                            fullWidth
-                          />
-                        </Grid>
-                        <Grid item md={12} xs={12}>
-                          <TextField
-                            id="codMec"
-                            name="codMec"
-                            label="Código MEC"
-                            variant="outlined"
-                            required
-                            value={values.codMec}
-                            onChange={handleChange}
-                            fullWidth
-                          />
-                        </Grid>
-                        <Grid item md={12} xs={12}>
-                          <FormControl component="fieldset">
-                            <FormLabel component="legend">Status</FormLabel>
-                            <RadioGroup
-                              name="status"
-                              value={values.situacaoCurso}
+              {loading ? (
+                <Grid
+                  container
+                  item
+                  md={12}
+                  xs={12}
+                  justify="center"
+                  alignItems="center"
+                  style={{ minHeight: 300 }}
+                >
+                  <CircularProgress />
+                </Grid>
+              ) : (
+                <Formik
+                  initialValues={{
+                    nomeCurso: curso.nomeCurso,
+                    duracaoCurso: curso.duracaoCurso,
+                    descricaoCurso: curso.descricaoCurso,
+                    situacaoCurso: curso.situacaoCurso,
+                    codMec: curso.codMec
+                  }}
+                  validationSchema={CursoSchema}
+                  onSubmit={(values, { resetForm }) => {
+                    handleSubmit(values, resetForm);
+                  }}
+                >
+                  {({ handleChange, values, errors }) => (
+                    <Form>
+                      <CardContent>
+                        <Grid container spacing={3}>
+                          <Grid item md={12} xs={12}>
+                            <TextField
+                              id="nomeCurso"
+                              name="nomeCurso"
+                              label="Nome do Curso"
+                              variant="outlined"
+                              required
+                              value={values.nomeCurso}
                               onChange={handleChange}
-                            >
-                              <FormControlLabel
-                                value="true"
-                                control={<Radio />}
-                                label="Ativo"
-                              />
-                              <FormControlLabel
-                                value="false"
-                                control={<Radio />}
-                                label="Inativo"
-                              />
-                            </RadioGroup>
-                          </FormControl>
+                              error={errors.nomeCurso ? true : false}
+                              helperText={errors.nomeCurso}
+                              fullWidth
+                            />
+                          </Grid>
+                          <Grid item md={12} xs={12}>
+                            <TextField
+                              id="duracaoCurso"
+                              name="duracaoCurso"
+                              label="Duracao Curso"
+                              variant="outlined"
+                              required
+                              onChange={handleChange}
+                              value={values.duracaoCurso}
+                              fullWidth
+                              type="number"
+                            />
+                          </Grid>
+                          <Grid item md={12} xs={12}>
+                            <TextField
+                              id="descricaoCurso"
+                              label="Descrição do Curso"
+                              fullWidth
+                              multiline
+                              rowsMax={4}
+                              variant="outlined"
+                              onChange={handleChange}
+                              value={values.descricaoCurso}
+                            />
+                          </Grid>
+                          <Grid item md={12} xs={12}>
+                            <FormControl component="fieldset">
+                              <FormLabel component="legend">
+                                situacao Curso
+                              </FormLabel>
+                              <RadioGroup
+                                name="situacaoCurso"
+                                value={values.situacaoCurso}
+                                onChange={handleChange}
+                              >
+                                <FormControlLabel
+                                  value="true"
+                                  control={<Radio />}
+                                  label="Ativo"
+                                />
+                                <FormControlLabel
+                                  value="false"
+                                  control={<Radio />}
+                                  label="Inativo"
+                                />
+                              </RadioGroup>
+                            </FormControl>
+                          </Grid>
+                          <Grid item md={12} xs={12}>
+                            <TextField
+                              id="codMec"
+                              label="codigo Mec"
+                              fullWidth
+                              multiline
+                              rowsMax={4}
+                              variant="outlined"
+                              onChange={handleChange}
+                              value={values.codMec}
+                            />
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    </CardContent>
-                    <Divider />
-                    <CardActions>
-                      <Grid container item md={12} xs={12} justify="flex-end">
-                        <Button
-                          size="large"
-                          color="primary"
-                          variant="contained"
-                          type="submit"
-                        >
-                          Criar Curso
-                        </Button>
-                      </Grid>
-                    </CardActions>
-                  </Form>
-                )}
-              </Formik>
+                      </CardContent>
+                      <Divider />
+                      <CardActions>
+                        <Grid container item md={12} xs={12} justify="flex-end">
+                          <Button
+                            size="large"
+                            color="primary"
+                            variant="contained"
+                            type="submit"
+                          >
+                            Alterar Curso
+                          </Button>
+                        </Grid>
+                      </CardActions>
+                    </Form>
+                  )}
+                </Formik>
+              )}
             </Card>
           </Grid>
         </Grid>
