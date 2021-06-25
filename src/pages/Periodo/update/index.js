@@ -49,7 +49,7 @@ export default function UpdatePeriodo() {
         getPeriodo();
     }, []);
     const PeriodoSchema = Yup.object().shape({
-        nomePeriodo: Yup.string().max(20, 'Nome da periodo maior que o limite'),
+        nome_periodo: Yup.string().max(20, 'Nome da periodo maior que o limite'),
     });
 
     const handleSubmit = async (values, resetForm) => {
@@ -97,7 +97,7 @@ export default function UpdatePeriodo() {
                                 </Grid>
                                 : <Formik
                                     initialValues={{
-                                        nomePeriodo: periodo.nomePeriodo,
+                                        nome_periodo: periodo.nome_periodo,
                                     }}
                                     validationSchema={PeriodoSchema}
                                     onSubmit={(values, { resetForm }) => {
@@ -110,10 +110,10 @@ export default function UpdatePeriodo() {
                                                 <Grid container spacing={3}>
                                                     <Grid item md={12} xs={12}>
                                                         <TextField
-                                                            id="nomePeriodo"
+                                                            id="nome_periodo"
                                                             label="Nome do periodo"
                                                             onChange={handleChange}
-                                                            value={values.nomePeriodo}
+                                                            value={values.nome_periodo}
 
                                                         />
                                                     </Grid>

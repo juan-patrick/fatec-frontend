@@ -23,7 +23,7 @@ import api from "../../../services/api";
 export default function CreatePeriodo() {
     const history = useHistory();
     const PeriodoSchema = Yup.object().shape({
-        nomePeriodo: Yup.string().min(1, "Nome muito pequeno.").max(255, "Nome muito grande").required(),
+        nome_periodo: Yup.string().min(1, "Nome muito pequeno.").max(255, "Nome muito grande").required(),
     });
     const handleSubmit = async (values, resetForm) => {
         await api.post("/periodo", values).then(({ data }) => {
@@ -55,7 +55,7 @@ export default function CreatePeriodo() {
                             <Divider />
                             <Formik
                                 initialValues={{
-                                    nomePeriodo: "",
+                                    nome_periodo: "",
 
                                 }}
                                 validationSchema={PeriodoSchema}
@@ -69,7 +69,7 @@ export default function CreatePeriodo() {
                                             <Grid container spacing={3}>
                                                 <Grid item md={12} xs={12}>
                                                     <TextField
-                                                        id="nomePeriodo"
+                                                        id="nome_periodo"
                                                         label="Nome do periodo"
                                                         onChange={handleChange}
                                                         value={values.nomePeriodo}
