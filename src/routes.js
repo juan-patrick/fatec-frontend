@@ -19,12 +19,15 @@ import UpdateHorario from "./pages/UpdateHorario";
 import Turma from "./pages/Turma";
 import CreateTurma from "./pages/CreateTurma";
 import UpdateTurma from "./pages/UpdateTurma";
+
 import CreateProfessor from './pages/CreateProfessor';
 import UpdateProfessor from './pages/UpdateProfessor';
 import Professor from './pages/Professor';
+
 import CreateInatividade from './pages/CreateInatividade';
 import UpdateInatividade from './pages/UpdateInatividade';
 import Inatividade from './pages/Inatividade';
+
 import CreateVinculo from './pages/CreateVinculo';
 import UpdateVinculo from './pages/UpdateVinculo';
 import Vinculo from './pages/Vinculo';
@@ -32,62 +35,74 @@ import Vinculo from './pages/Vinculo';
 import Disciplina from "./pages/Disciplina";
 import CreateDisciplina from "./pages/CreateDisciplina";
 import UpdateDisciplina from "./pages/UpdadeDisciplina";
+
 import Matriz from "./pages/Matriz";
 import CreateMatriz from "./pages/CreateMatriz";
 import UpdateMatriz from "./pages/UpdateMatriz";
+
+import PrivateRoute from "./components/PrivateRoute";
+
+import { SnackbarProvider } from "notistack";
 
 import Login from "./pages/Login";
 
 export default function Routes() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" exact component={CursoExtensao} />
-        <Route path="/login" component={Login} />
-        <Route path="/cursoExtensao" component={CursoExtensao} />
-        <Route path="/create/cursoExtensao" component={CreateCursoExtensao} />
-        <Route path="/update/cursoExtensao/:cursoExtensaoId" component={UpdateCursoExtensao}
-        />
+    <SnackbarProvider
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
+    >
+      <BrowserRouter>
+        <Switch>
+          <Route path="/login" component={Login} permission={1} />
+          <PrivateRoute path="/" exact component={CursoExtensao} />
+          <PrivateRoute path="/cursoExtensao" component={CursoExtensao} permission={1} />
+          <PrivateRoute path="/create/cursoExtensao" component={CreateCursoExtensao} permission={1} />
+          <PrivateRoute path="/update/cursoExtensao/:cursoExtensaoId" component={UpdateCursoExtensao}  permission={1}
+          />
 
-        <Route path="/cursos" component={Curso} />
-        <Route path="/create/cursos" component={CreateCurso} />
-        <Route path="/update/cursos/:cursoId" component={UpdateCurso} />
+          <PrivateRoute path="/cursos" component={Curso} permission={1} />
+          <PrivateRoute path="/create/cursos" component={CreateCurso} permission={1} />
+          <PrivateRoute path="/update/cursos/:cursoId" component={UpdateCurso} permission={1} />
 
-        <Route path="/projeto" component={Projeto} />
-        <Route path="/create/projeto" component={CreateProjeto} />
-        <Route path="/update/projeto/:projetoId" component={UpdateProjeto} />
+          <PrivateRoute path="/projeto" component={Projeto} permission={1} />
+          <PrivateRoute path="/create/projeto" component={CreateProjeto} permission={1} />
+          <PrivateRoute path="/update/projeto/:projetoId" component={UpdateProjeto} permission={1} />
 
-        <Route path="/matriz" component={Matriz} />
-        <Route path="/create/matriz" component={CreateMatriz} />
-        <Route path="/update/matriz/:matrizId" component={UpdateMatriz} />
+          <PrivateRoute path="/matriz" component={Matriz} permission={1} />
+          <PrivateRoute path="/create/matriz" component={CreateMatriz} permission={1} />
+          <PrivateRoute path="/update/matriz/:matrizId" component={UpdateMatriz} permission={1} />
 
-        <Route path="/horario" component={Horario} />
-        <Route path="/create/horario" component={CreateHorario} />
-        <Route path="/update/horario/:horarioId" component={UpdateHorario} />
+          <PrivateRoute path="/horario" component={Horario} permission={1} />
+          <PrivateRoute path="/create/horario" component={CreateHorario} permission={1} />
+          <PrivateRoute path="/update/horario/:horarioId" component={UpdateHorario} permission={1} />
 
-        <Route path="/turma" component={Turma} />
-        <Route path="/create/turma" component={CreateTurma} />
-        <Route path="/update/turma/:turmaId" component={UpdateTurma} />
+          <PrivateRoute path="/turma" component={Turma} permission={1} />
+          <PrivateRoute path="/create/turma" component={CreateTurma} permission={1} />
+          <PrivateRoute path="/update/turma/:turmaId" component={UpdateTurma} permission={1} />
 
-        <Route path="/professores" component={Professor} />
-        <Route path="/create/professores" component={CreateProfessor} />
-        <Route path="/update/professores/:professorId" component={UpdateProfessor} />
+          <PrivateRoute path="/professores" component={Professor} permission={1} />
+          <PrivateRoute path="/create/professores" component={CreateProfessor} permission={1} />
+          <PrivateRoute path="/update/professores/:professorId" component={UpdateProfessor} permission={1} />
 
-        <Route path="/inatividades" component={Inatividade} />
-        <Route path="/create/inatividades" component={CreateInatividade} />
-        <Route path="/update/inatividades/:inatividadeId" component={UpdateInatividade} />
+          <PrivateRoute path="/inatividades" component={Inatividade} permission={1} />
+          <PrivateRoute path="/create/inatividades" component={CreateInatividade} permission={1} />
+          <PrivateRoute path="/update/inatividades/:inatividadeId" component={UpdateInatividade} permission={1} />
 
-        <Route path="/vinculos" component={Vinculo} />
-        <Route path="/create/vinculos" component={CreateVinculo} />
-        <Route path="/update/vinculos/:vinculoId" component={UpdateVinculo} />
+          <PrivateRoute path="/vinculos" component={Vinculo} permission={1} />
+          <PrivateRoute path="/create/vinculos" component={CreateVinculo} permission={1} />
+          <PrivateRoute path="/update/vinculos/:vinculoId" component={UpdateVinculo} permission={1} />
 
-        <Route path="/disciplina" component={Disciplina} />
-        <Route path="/create/disciplina" component={CreateDisciplina} />
-        <Route
-          path="/update/disciplina/:disciplinaId"
-          component={UpdateDisciplina}
-        />
-      </Switch>
-    </BrowserRouter>
+          <PrivateRoute path="/disciplina" component={Disciplina} permission={1} />
+          <PrivateRoute path="/create/disciplina" component={CreateDisciplina} permission={1} />
+          <PrivateRoute permission={1}
+            path="/update/disciplina/:disciplinaId"
+            component={UpdateDisciplina}
+          />
+        </Switch>
+      </BrowserRouter>
+    </SnackbarProvider>
   );
 }
