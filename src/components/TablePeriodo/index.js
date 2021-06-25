@@ -99,7 +99,7 @@ export default function TablePeriodo({ data, setData }) {
                 <TableBody>
                     {data && data.map((periodo) => (
                         <TableRow key={periodo.id}>
-                            <TableCell>{periodo.nome_periodo}</TableCell>
+                            <TableCell>{periodo.nomePeriodo}</TableCell>
                             <TableCell>
                                 <Button
                                     variant="contained"

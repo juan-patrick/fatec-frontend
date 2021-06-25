@@ -1,5 +1,9 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
+import EmpregoPublico from "./pages/EmpregoPublico";
+import CreateEmpregoPublico from "./pages/CreateEmpregoPublico";
+import UpdateEmpregoPublico from "./pages/UpdateEmpregoPublico";
+
 import CursoExtensao from "./pages/CursoExtensao";
 import CreateCursoExtensao from "./pages/CreateCursoExtensao";
 import UpdateCursoExtensao from "./pages/UpdateCursoExtensao";
@@ -19,12 +23,15 @@ import UpdateHorario from "./pages/UpdateHorario";
 import Turma from "./pages/Turma";
 import CreateTurma from "./pages/CreateTurma";
 import UpdateTurma from "./pages/UpdateTurma";
+
 import CreateProfessor from './pages/CreateProfessor';
 import UpdateProfessor from './pages/UpdateProfessor';
 import Professor from './pages/Professor';
+
 import CreateInatividade from './pages/CreateInatividade';
 import UpdateInatividade from './pages/UpdateInatividade';
 import Inatividade from './pages/Inatividade';
+
 import CreateVinculo from './pages/CreateVinculo';
 import UpdateVinculo from './pages/UpdateVinculo';
 import Vinculo from './pages/Vinculo';
@@ -32,9 +39,18 @@ import Vinculo from './pages/Vinculo';
 import Disciplina from "./pages/Disciplina";
 import CreateDisciplina from "./pages/CreateDisciplina";
 import UpdateDisciplina from "./pages/UpdadeDisciplina";
+
 import Matriz from "./pages/Matriz";
 import CreateMatriz from "./pages/CreateMatriz";
 import UpdateMatriz from "./pages/UpdateMatriz";
+
+import Titulacao from "./pages/Titulacao";
+import CreateTitulacao from "./pages/CreateTitulacao";
+import UpdateTitulacao from "./pages/UpdateTitulacao";
+
+import TipoContrato from "./pages/TipoContrato";
+import CreateTipoContrato from "./pages/CreateTipoContrato";
+import UpdateTipoContrato from "./pages/UpdateTipoContrato";
 
 import Login from "./pages/Login";
 // GRUPO 4
@@ -97,10 +113,20 @@ export default function Routes() {
 
         <Route path="/disciplina" component={Disciplina} />
         <Route path="/create/disciplina" component={CreateDisciplina} />
-        <Route
-          path="/update/disciplina/:disciplinaId"
-          component={UpdateDisciplina}
-        />
+        <Route path="/update/disciplina/:disciplinaId" component={UpdateDisciplina} />
+
+        <Route path="/empregoPublico" component={EmpregoPublico} />
+        <Route path="/create/empregoPublico" component={CreateEmpregoPublico} />
+        <Route path="/update/empregoPublico/:empregoPublicoId" component={UpdateEmpregoPublico} />
+
+        <Route path="/titulacao" component={Titulacao} />
+        <Route path="/create/titulacao" component={CreateTitulacao} />
+        <Route path="/update/titulacao/:titulacaoId" component={UpdateTitulacao} />
+
+        <Route path="/tipoContrato" component={TipoContrato} />
+        <Route path="/create/tipoContrato" component={CreateTipoContrato} />
+        <Route path="/update/tipoContrato/:tipoContratoId" component={UpdateTipoContrato} />
+
       </Switch>
     </BrowserRouter>
   );

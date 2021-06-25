@@ -1,9 +1,6 @@
 import Page from "../../components/Page";
-
 import { Formik, Form } from "formik";
-
 import { useHistory } from "react-router-dom";
-
 import {
   Card,
   CardHeader,
@@ -12,6 +9,11 @@ import {
   Typography,
   Divider,
   TextField,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
   CardActions,
   Button,
   CircularProgress,
@@ -25,19 +27,19 @@ import { useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
-export default function UpdateHorario() {
-  const { horarioId } = useParams();
+export default function UpdateTitulacao() {
+  const { titulacaoId } = useParams();
 
-  const [horario, setHorario] = useState({});
+  const [titulacao, setTitulacao] = useState({});
   const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
-  const getHorario = async () => {
+  const getTitulacao = async () => {
     await api
-      .get(`/horario/${horarioId}`)
+      .get(`/titulacao/${titulacaoId}`)
       .then(({ data }) => {
-        setHorario(data);
+        setTitulacao(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -47,18 +49,21 @@ export default function UpdateHorario() {
   };
 
   useEffect(() => {
-    getHorario();
+    getTitulacao();
   },[]);
-  const HorarioSchema = Yup.object().shape({
-    horarioInicial: Yup.string().required(),
-    horarioFinal: Yup.string().required(),
+
+  const TitulacaoSchema = Yup.object().shape({
+    nomeTitulacao: Yup.string()
+      .min(1, "Nome muito pequeno.")
+      .max(255, "Nome muito grande")
+      .required(),
   });
 
   const handleSubmit = async (values, resetForm) => {
     await api
-      .put(`/horario/${horarioId}`, values)
+      .put(`/titulacao/${titulacaoId}`, values)
       .then(({ data }) => {
-        history.push("/horario");
+        history.push("/titulacao");
       })
       .catch((error) => {
         resetForm();
@@ -72,7 +77,7 @@ export default function UpdateHorario() {
         <Grid item container spacing={2}>
           <Grid item md={8} xs={12}>
             <Typography variant="h5" gutterBottom>
-              Alteração de Horario
+              Alteração Titulacao
             </Typography>
           </Grid>
           <Grid item md={7} xs={12}>
@@ -80,7 +85,7 @@ export default function UpdateHorario() {
               <CardHeader
                 title={
                   <Typography variant="h6">
-                    Formulário de Alteração de Horario
+                    Formulário de Alteração da Titulacao
                   </Typography>
                 }
               />
@@ -100,10 +105,9 @@ export default function UpdateHorario() {
               ) : (
                 <Formik
                   initialValues={{
-                    horarioInicial: horario.horarioInicial,
-                    horarioFinal: horario.horarioFinal,
-                  }}
-                  validationSchema={HorarioSchema}
+                    nomeTitulacao: titulacao.nomeTitulacao,
+                 }}
+                  validationSchema={TitulacaoSchema}
                   onSubmit={(values, { resetForm }) => {
                     handleSubmit(values, resetForm);
                   }}
@@ -114,40 +118,30 @@ export default function UpdateHorario() {
                         <Grid container spacing={3}>
                           <Grid item md={12} xs={12}>
                             <TextField
-                              id="HorarioInicial"
-                              label="Hora inicial"
-                              type="time"
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
+                              id="nomeTitulacao"
+                              name="nomeTitulacao"
+                              label="Nome Titulacao"
+                              variant="outlined"
+                              required
+                              value={values.nomeTitulacao}
                               onChange={handleChange}
-                              value={values.horarioInicial}
+                              error={errors.nomeTitulacao ? true : false}
+                              helperText={errors.nomeTitulacao}
+                              fullWidth
                             />
-                          </Grid>
-                          <Grid item md={12} xs={12}>
-                            <TextField
-                              id="HorarioFinal"
-                              label="Hora final"
-                              type="time"
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
-                              onChange={handleChange}
-                              value={values.horarioFinal}
-                            />
-                          </Grid>
+                          </Grid>                      
                         </Grid>
                       </CardContent>
                       <Divider />
                       <CardActions>
-                        <Grid container item md={12} xs={12} justify="center">
+                        <Grid container item md={12} xs={12} justify="flex-end">
                           <Button
                             size="large"
                             color="primary"
                             variant="contained"
                             type="submit"
                           >
-                            Alterar Horario
+                            Alterar Titulacao
                           </Button>
                         </Grid>
                       </CardActions>

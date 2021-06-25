@@ -222,6 +222,28 @@ export default function DrawerBar() {
             <ListItemText primary="Periodo" />
           </ListItem>
 
+          
+          <ListItem button key="EmpregoPublico" onClick={(e) => history.push('/empregoPublico')}>
+            <ListItemIcon>
+              <AccessAlarm />
+            </ListItemIcon>
+            <ListItemText primary="empregoPublico" />
+          </ListItem>
+
+          <ListItem button key="Titulacao" onClick={(e) => history.push('/titulacao')}>
+            <ListItemIcon>
+              <AccessAlarm />
+            </ListItemIcon>
+            <ListItemText primary="titulacao" />
+          </ListItem>
+
+          <ListItem button key="TipoContrato" onClick={(e) => history.push('/tipoContrato')}>
+            <ListItemIcon>
+              <AccessAlarm />
+            </ListItemIcon>
+            <ListItemText primary="tipoContrato" />
+          </ListItem>
+
         <List className={classes.last}>
           <ListItem button key="logout">
             <ListItemIcon></ListItemIcon>

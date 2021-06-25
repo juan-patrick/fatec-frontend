@@ -29,7 +29,7 @@ export default function CreateInatividade() {
   const history = useHistory();
 
   const InatividadeSchema = Yup.object().shape({
-    nome_inatividade: Yup.string()
+    nomeInatividade: Yup.string()
       .min(3, "Nome muito pequeno.")
       .max(45, "Nome é muito grande")
       .required(),
@@ -69,7 +69,7 @@ export default function CreateInatividade() {
               <Divider />
               <Formik
                 initialValues={{
-                  nome_inatividade: "",
+                  nomeInatividade: "",
                   status: true,
                 }}
                 validationSchema={InatividadeSchema}
@@ -83,16 +83,16 @@ export default function CreateInatividade() {
                       <Grid container spacing={3}>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="nome_inatividade"
-                            name="nome_inatividade"
+                            id="nomeInatividade"
+                            name="nomeInatividade"
                             label="Nome da Inatividade"
                             variant="outlined"
                             required
-                            value={values.nome_inatividade}
+                            value={values.nomeInatividade}
                             onChange={handleChange}
                             fullWidth
-                            error={errors.nome_inatividade ? true : false}
-                            helperText={errors.nome_inatividade}
+                            error={errors.nomeInatividade ? true : false}
+                            helperText={errors.nomeInatividade}
                           />
                         </Grid>
                         <Grid item md={12} xs={12}>

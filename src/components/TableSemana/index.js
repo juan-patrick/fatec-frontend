@@ -100,7 +100,7 @@ export default function TableSemana({ data, setData }) {
                 <TableBody>
                     {data && data.map((semana) => (
                         <TableRow key={semana.id}>
-                            <TableCell>{semana.nome_semana}</TableCell>
+                            <TableCell>{semana.nomeSemana}</TableCell>
                             <TableCell>
                                 <Button
                                     variant="contained"

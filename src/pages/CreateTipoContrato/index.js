@@ -1,4 +1,5 @@
-import Page from "../../../components/Page";
+import React from "react";
+import Page from "../../components/Page";
 
 import { Formik, Form } from "formik";
 
@@ -12,23 +13,30 @@ import {
     Typography,
     Divider,
     TextField,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    FormControlLabel,
+    Radio,
     CardActions,
     Button,
 } from "@material-ui/core";
 
 import * as Yup from "yup";
 
-import api from "../../../services/api";
+import api from "../../services/api";
 
-export default function CreatePeriodo() {
+export default function CreateTipoContrato() {
     const history = useHistory();
-    const PeriodoSchema = Yup.object().shape({
-        nomePeriodo: Yup.string().min(1, "Nome muito pequeno.").max(255, "Nome muito grande").required(),
+    const TipoContratoSchema = Yup.object().shape({
+        tipoContrato: Yup.string().min(1, "Nome muito pequeno.").max(255, "Nome muito grande").required(),
     });
     const handleSubmit = async (values, resetForm) => {
-        await api.post("/periodo", values).then(({ data }) => {
-            history.push("/periodo");
-        })
+        await api
+            .post("/tipoContrato", values)
+            .then(({ data }) => {
+                history.push("/tipoContrato");
+            })
             .catch((error) => {
                 resetForm();
                 console.log(error);
@@ -40,7 +48,7 @@ export default function CreatePeriodo() {
                 <Grid item container spacing={2} justify="center">
                     <Grid item md={8} xs={12}>
                         <Typography variant="h5" gutterBottom>
-                            Cadastro de Periodo
+                        Tipo Contrato
             </Typography>
                     </Grid>
                     <Grid item md={7} xs={12}>
@@ -48,17 +56,16 @@ export default function CreatePeriodo() {
                             <CardHeader
                                 title={
                                     <Typography variant="h6">
-                                        Formulário de Cadastro de Periodo
-                                     </Typography>
+                                        Formulário de Cadastro de Tipo Contrato
+                  </Typography>
                                 }
                             />
                             <Divider />
                             <Formik
                                 initialValues={{
-                                    nomePeriodo: "",
-
+                                    tipoContrato: "",
                                 }}
-                                validationSchema={PeriodoSchema}
+                                validationSchema={TipoContratoSchema}
                                 onSubmit={(values, { resetForm }) => {
                                     handleSubmit(values, resetForm);
                                 }}
@@ -69,13 +76,17 @@ export default function CreatePeriodo() {
                                             <Grid container spacing={3}>
                                                 <Grid item md={12} xs={12}>
                                                     <TextField
-                                                        id="nomePeriodo"
-                                                        label="Nome do periodo"
+                                                        id="tipoContrato"
+                                                        name="tipoContrato"
+                                                        label="Tipo de Contrato"
+                                                        variant="outlined"
+                                                        required
+                                                        value={values.tipoContrato}
                                                         onChange={handleChange}
-                                                        value={values.nomePeriodo}
-                                                        fullWidth
-                                                    />
-                                                </Grid>
+                                                        error={errors.tipoContrato ? true : false}
+                                                        helperText={errors.tipoContrato}
+                                                        fullWidth />
+                                                </Grid>                                                                                    
                                             </Grid>
                                         </CardContent>
                                         <Divider />
@@ -87,8 +98,8 @@ export default function CreatePeriodo() {
                                                     variant="contained"
                                                     type="submit"
                                                 >
-                                                    Criar Periodo
-                        </Button>
+                                                    Criar Tipo de Contrato
+                                            </Button>
                                             </Grid>
                                         </CardActions>
                                     </Form>
@@ -98,10 +109,7 @@ export default function CreatePeriodo() {
                     </Grid>
                 </Grid>
             </Grid>
-
-
         </Page>
-    )
+    );
+};
 
-
-}

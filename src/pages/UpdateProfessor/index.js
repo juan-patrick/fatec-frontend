@@ -39,8 +39,8 @@ export default function UpdateProfessor() {
 
 
   const ProfessorSchema = Yup.object().shape({
-    nome_professor: Yup.string().min(3, 'Nome muito pequeno.').max(45, 'Nome é muito grande').required(),
-    email_professor: Yup.string().max(45).required(),
+    nomeProfessor: Yup.string().min(3, 'Nome muito pequeno.').max(45, 'Nome é muito grande').required(),
+    emailProfessor: Yup.string().max(45).required(),
     status: Yup.bool(),
   });
 
@@ -67,7 +67,7 @@ export default function UpdateProfessor() {
               {loading ?
                 <Grid container item md={12} xs={12} justify="center" alignItems="center" style={{ minHeight: 300 }}>
                   <CircularProgress />
-                </Grid> : <Formik initialValues={{ nome_professor: professor.nome_professor, email_professor: professor.email_professor }} validationSchema={ProfessorSchema} onSubmit={(values, { resetForm }) => {
+                </Grid> : <Formik initialValues={{ nomeProfessor: professor.nomeProfessor, emailProfessor: professor.emailProfessor }} validationSchema={ProfessorSchema} onSubmit={(values, { resetForm }) => {
                   handleSubmit(values, resetForm);
                 }}>
                   {({ handleChange, values, errors }) => (
@@ -75,10 +75,10 @@ export default function UpdateProfessor() {
                       <CardContent>
                         <Grid container spacing={3}>
                           <Grid item md={12} xs={12}>
-                            <TextField id="nome_professor" name="nome_professor" label="Nome do Professor" variant="outlined" required value={values.nome_professor} onChange={handleChange} fullWidth error={errors.nome_professor ? true : false} helperText={errors.nome_professor} />
+                            <TextField id="nomeProfessor" name="nomeProfessor" label="Nome do Professor" variant="outlined" required value={values.nomeProfessor} onChange={handleChange} fullWidth error={errors.nomeProfessor ? true : false} helperText={errors.nomeProfessor} />
                           </Grid>
                           <Grid item md={12} xs={12}>
-                            <TextField id="email_professor" name="email_professor" label="Email do Professor" variant="outlined" required value={values.email_professor} onChange={handleChange} fullWidth />
+                            <TextField id="emailProfessor" name="emailProfessor" label="Email do Professor" variant="outlined" required value={values.emailProfessor} onChange={handleChange} fullWidth />
                           </Grid>
                           <Grid item md={12} xs={12}>
                             <FormControl component="fieldset">

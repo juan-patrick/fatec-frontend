@@ -23,7 +23,7 @@ import api from "../../../services/api";
 export default function CreateSemana() {
     const history = useHistory();
     const SemanaSchema = Yup.object().shape({
-        nome_semana: Yup.string().min(1, "Nome muito pequeno.").max(255, "Nome muito grande").required(),
+        nomeSemana: Yup.string().min(1, "Nome muito pequeno.").max(255, "Nome muito grande").required(),
     });
     const handleSubmit = async (values, resetForm) => {
         await api.post("/semana", values).then(({ data }) => {
@@ -55,7 +55,7 @@ export default function CreateSemana() {
                             <Divider />
                             <Formik
                                 initialValues={{
-                                    nome_semana: "",
+                                    nomeSemana: "",
 
                                 }}
                                 validationSchema={SemanaSchema}
@@ -72,7 +72,7 @@ export default function CreateSemana() {
                                                         id="nome_semana"
                                                         label="Nome da semana"
                                                         onChange={handleChange}
-                                                        value={values.nome_semana}
+                                                        value={values.nomeSemana}
                                                         fullWidth
                                                     />
                                                 </Grid>

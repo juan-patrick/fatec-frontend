@@ -1,9 +1,6 @@
 import Page from "../../components/Page";
-
 import { Formik, Form } from "formik";
-
 import { useHistory } from "react-router-dom";
-
 import {
   Card,
   CardHeader,
@@ -12,6 +9,11 @@ import {
   Typography,
   Divider,
   TextField,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
   CardActions,
   Button,
   CircularProgress,
@@ -25,19 +27,19 @@ import { useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
-export default function UpdateHorario() {
-  const { horarioId } = useParams();
+export default function UpdateTipoContrato() {
+  const { tipoContratoId } = useParams();
 
-  const [horario, setHorario] = useState({});
+  const [tipoContrato, setTipoContrato] = useState({});
   const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
-  const getHorario = async () => {
+  const getTipoContrato = async () => {
     await api
-      .get(`/horario/${horarioId}`)
+      .get(`/tipoContrato/${tipoContratoId}`)
       .then(({ data }) => {
-        setHorario(data);
+        setTipoContrato(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -47,18 +49,22 @@ export default function UpdateHorario() {
   };
 
   useEffect(() => {
-    getHorario();
+    getTipoContrato();
   },[]);
-  const HorarioSchema = Yup.object().shape({
-    horarioInicial: Yup.string().required(),
-    horarioFinal: Yup.string().required(),
+  console.log(tipoContrato)
+
+  const TipoContratoSchema = Yup.object().shape({
+    tipoContrato: Yup.string()
+      .min(1, "Nome muito pequeno.")
+      .max(255, "Nome muito grande")
+      .required(),
   });
 
   const handleSubmit = async (values, resetForm) => {
     await api
-      .put(`/horario/${horarioId}`, values)
+      .put(`/tipoContrato/${tipoContratoId}`, values)
       .then(({ data }) => {
-        history.push("/horario");
+        history.push("/tipoContrato");
       })
       .catch((error) => {
         resetForm();
@@ -72,7 +78,7 @@ export default function UpdateHorario() {
         <Grid item container spacing={2}>
           <Grid item md={8} xs={12}>
             <Typography variant="h5" gutterBottom>
-              Alteração de Horario
+              Alteração Tipo de Contrato
             </Typography>
           </Grid>
           <Grid item md={7} xs={12}>
@@ -80,7 +86,7 @@ export default function UpdateHorario() {
               <CardHeader
                 title={
                   <Typography variant="h6">
-                    Formulário de Alteração de Horario
+                    Formulário de Alteração do Tipo Contrato
                   </Typography>
                 }
               />
@@ -100,10 +106,9 @@ export default function UpdateHorario() {
               ) : (
                 <Formik
                   initialValues={{
-                    horarioInicial: horario.horarioInicial,
-                    horarioFinal: horario.horarioFinal,
-                  }}
-                  validationSchema={HorarioSchema}
+                    tipoContrato: tipoContrato.tipoContrato,
+                 }}
+                  validationSchema={TipoContratoSchema}
                   onSubmit={(values, { resetForm }) => {
                     handleSubmit(values, resetForm);
                   }}
@@ -114,40 +119,30 @@ export default function UpdateHorario() {
                         <Grid container spacing={3}>
                           <Grid item md={12} xs={12}>
                             <TextField
-                              id="HorarioInicial"
-                              label="Hora inicial"
-                              type="time"
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
+                              id="tipoContrato"
+                              name="tipoContrato"
+                              label="Tipo de Contrato"
+                              variant="outlined"
+                              required
+                              value={values.tipoContrato}
                               onChange={handleChange}
-                              value={values.horarioInicial}
+                              error={errors.tipoContrato ? true : false}
+                              helperText={errors.tipoContrato}
+                              fullWidth
                             />
-                          </Grid>
-                          <Grid item md={12} xs={12}>
-                            <TextField
-                              id="HorarioFinal"
-                              label="Hora final"
-                              type="time"
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
-                              onChange={handleChange}
-                              value={values.horarioFinal}
-                            />
-                          </Grid>
+                          </Grid>                      
                         </Grid>
                       </CardContent>
                       <Divider />
                       <CardActions>
-                        <Grid container item md={12} xs={12} justify="center">
+                        <Grid container item md={12} xs={12} justify="flex-end">
                           <Button
                             size="large"
                             color="primary"
                             variant="contained"
                             type="submit"
                           >
-                            Alterar Horario
+                            Alterar Tipo de Contrato
                           </Button>
                         </Grid>
                       </CardActions>

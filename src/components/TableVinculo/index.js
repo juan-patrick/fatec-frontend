@@ -48,7 +48,7 @@ export default function TableVinculo({ data, setData }) {
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. A voluptatem voluptas consequuntur adipisci soluta fuga molestias voluptate praesentium, distinctio nesciunt nam veniam repudiandae sint mollitia illum veritatis ipsa ratione deleniti!
           </DialogContentText>
           <DialogContentText>
-            <b>A inatividade que será removida é: {vinculoToDelete.nome_vinculo || ''}</b>
+            <b>A inatividade que será removida é: {vinculoToDelete.nomeVinculo || ''}</b>
           </DialogContentText>
           <DialogActions>
             <Grid container item xs={12} md={12} spacing={4} justify="flex-end">
@@ -86,7 +86,7 @@ export default function TableVinculo({ data, setData }) {
           {data && data.map(vinculo => (
             <TableRow key={vinculo.id}>
               <TableCell>
-                {vinculo.nome_vinculo}
+                {vinculo.nomeVinculo}
               </TableCell>
               <TableCell>
               <Button variant="contained" color="primary"

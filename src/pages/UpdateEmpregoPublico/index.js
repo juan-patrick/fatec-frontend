@@ -1,9 +1,6 @@
 import Page from "../../components/Page";
-
 import { Formik, Form } from "formik";
-
 import { useHistory } from "react-router-dom";
-
 import {
   Card,
   CardHeader,
@@ -12,6 +9,11 @@ import {
   Typography,
   Divider,
   TextField,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
   CardActions,
   Button,
   CircularProgress,
@@ -25,19 +27,19 @@ import { useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
-export default function UpdateHorario() {
-  const { horarioId } = useParams();
+export default function UpdateEmpregoPublico() {
+  const { empregoPublicoId } = useParams();
 
-  const [horario, setHorario] = useState({});
+  const [empregoPublico, setEmpregoPublico] = useState({});
   const [loading, setLoading] = useState(true);
 
   const history = useHistory();
 
-  const getHorario = async () => {
+  const getEmpregoPublico = async () => {
     await api
-      .get(`/horario/${horarioId}`)
+      .get(`/empregoPublico/${empregoPublicoId}`)
       .then(({ data }) => {
-        setHorario(data);
+        setEmpregoPublico(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -47,18 +49,22 @@ export default function UpdateHorario() {
   };
 
   useEffect(() => {
-    getHorario();
+    getEmpregoPublico();
   },[]);
-  const HorarioSchema = Yup.object().shape({
-    horarioInicial: Yup.string().required(),
-    horarioFinal: Yup.string().required(),
+
+  const EmpregoPublicoSchema = Yup.object().shape({
+    cargoPublico: Yup.string()
+      .min(1, "Nome muito pequeno.")
+      .max(255, "Nome muito grande")
+      .required(),
+    situacao: Yup.bool().required(),
   });
 
   const handleSubmit = async (values, resetForm) => {
     await api
-      .put(`/horario/${horarioId}`, values)
+      .put(`/empregoPublico/${empregoPublicoId}`, values)
       .then(({ data }) => {
-        history.push("/horario");
+        history.push("/empregoPublico");
       })
       .catch((error) => {
         resetForm();
@@ -72,7 +78,7 @@ export default function UpdateHorario() {
         <Grid item container spacing={2}>
           <Grid item md={8} xs={12}>
             <Typography variant="h5" gutterBottom>
-              Alteração de Horario
+              Alteração do cargo Publico
             </Typography>
           </Grid>
           <Grid item md={7} xs={12}>
@@ -80,7 +86,7 @@ export default function UpdateHorario() {
               <CardHeader
                 title={
                   <Typography variant="h6">
-                    Formulário de Alteração de Horario
+                    Formulário de Alteração do cargo Publico
                   </Typography>
                 }
               />
@@ -100,10 +106,10 @@ export default function UpdateHorario() {
               ) : (
                 <Formik
                   initialValues={{
-                    horarioInicial: horario.horarioInicial,
-                    horarioFinal: horario.horarioFinal,
+                    cargoPublico: empregoPublico.cargoPublico,
+                    situacao: empregoPublico.situacao,
                   }}
-                  validationSchema={HorarioSchema}
+                  validationSchema={EmpregoPublicoSchema}
                   onSubmit={(values, { resetForm }) => {
                     handleSubmit(values, resetForm);
                   }}
@@ -114,40 +120,53 @@ export default function UpdateHorario() {
                         <Grid container spacing={3}>
                           <Grid item md={12} xs={12}>
                             <TextField
-                              id="HorarioInicial"
-                              label="Hora inicial"
-                              type="time"
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
+                              id="cargoPublico"
+                              name="cargoPublico"
+                              label="cargo Publico"
+                              variant="outlined"
+                              required
+                              value={values.cargoPublico}
                               onChange={handleChange}
-                              value={values.horarioInicial}
+                              error={errors.cargoPublico ? true : false}
+                              helperText={errors.cargoPublico}
+                              fullWidth
                             />
-                          </Grid>
+                          </Grid>                       
                           <Grid item md={12} xs={12}>
-                            <TextField
-                              id="HorarioFinal"
-                              label="Hora final"
-                              type="time"
-                              InputLabelProps={{
-                                shrink: true,
-                              }}
-                              onChange={handleChange}
-                              value={values.horarioFinal}
-                            />
+                            <FormControl component="fieldset">
+                              <FormLabel component="legend">
+                                situacao
+                              </FormLabel>
+                              <RadioGroup
+                                name="situacao"
+                                value={values.situacao}
+                                onChange={handleChange}
+                              >
+                                <FormControlLabel
+                                  value="true"
+                                  control={<Radio />}
+                                  label="Ativo"
+                                />
+                                <FormControlLabel
+                                  value="false"
+                                  control={<Radio />}
+                                  label="Inativo"
+                                />
+                              </RadioGroup>
+                            </FormControl>
                           </Grid>
                         </Grid>
                       </CardContent>
                       <Divider />
                       <CardActions>
-                        <Grid container item md={12} xs={12} justify="center">
+                        <Grid container item md={12} xs={12} justify="flex-end">
                           <Button
                             size="large"
                             color="primary"
                             variant="contained"
                             type="submit"
                           >
-                            Alterar Horario
+                            Alterar Catgo Publico
                           </Button>
                         </Grid>
                       </CardActions>

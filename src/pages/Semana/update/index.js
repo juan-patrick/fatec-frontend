@@ -49,7 +49,7 @@ export default function UpdateSemana() {
         getSemana();
     }, []);
     const SemanaSchema = Yup.object().shape({
-        nome_semana: Yup.string().max(20, 'Nome da semana maior que o limite'),
+        nomeSemana: Yup.string().max(20, 'Nome da semana maior que o limite'),
     });
 
     const handleSubmit = async (values, resetForm) => {
@@ -97,7 +97,7 @@ export default function UpdateSemana() {
                                 </Grid>
                                 : <Formik
                                     initialValues={{
-                                        nome_semana: semana.nome_semana,
+                                        nomeSemana: semana.nomeSemana,
                                     }}
                                     validationSchema={SemanaSchema}
                                     onSubmit={(values, { resetForm }) => {
@@ -110,10 +110,10 @@ export default function UpdateSemana() {
                                                 <Grid container spacing={3}>
                                                     <Grid item md={12} xs={12}>
                                                         <TextField
-                                                            id="nome_semana"
+                                                            id="nomeSemana"
                                                             label="Nome da semana"
                                                             onChange={handleChange}
-                                                            value={values.nome_semana}
+                                                            value={values.nomeSemana}
 
                                                         />
                                                     </Grid>

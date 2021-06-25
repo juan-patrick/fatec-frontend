@@ -79,7 +79,7 @@ export default function CreateHorario() {
                               shrink: true,
                             }}
                             onChange={handleChange}
-                            value={values.HorarioInicial}
+                            value={values.horarioInicial}
                           />
                         </Grid>
                         <Grid item md={12} xs={12}>
@@ -91,7 +91,7 @@ export default function CreateHorario() {
                               shrink: true,
                             }}
                             onChange={handleChange}
-                            value={values.HorarioFinal}
+                            value={values.horarioFinal}
                           />
                         </Grid>
                       </Grid>
