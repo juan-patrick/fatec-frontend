@@ -45,7 +45,7 @@ export default function TableProfessor({ data, setData }) {
         </DialogTitle>
         <DialogContent dividers>
           <DialogContentText>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. A voluptatem voluptas consequuntur adipisci soluta fuga molestias voluptate praesentium, distinctio nesciunt nam veniam repudiandae sint mollitia illum veritatis ipsa ratione deleniti!
+          Se você confirmar esta operação o professor será deletado PERMANENTEMENTE
           </DialogContentText>
           <DialogContentText>
             <b>O professor que será removido é: {professorToDelete.nomeProfessor || ''}</b>
@@ -73,14 +73,29 @@ export default function TableProfessor({ data, setData }) {
               <Typography variant="subtitle1"><b>Nome</b></Typography>
             </TableCell>
             <TableCell>
+              <Typography variant="subtitle1"><b>CPF</b></Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1"><b>RG</b></Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1"><b>Data de nascimento</b></Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1"><b>Telefone</b></Typography>
+            </TableCell>
+            <TableCell>
               <Typography variant="subtitle1"><b>Email</b></Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1"><b>Endereço</b></Typography>
+            </TableCell>
+            <TableCell>
+              <Typography variant="subtitle1"><b>CEP</b></Typography>
             </TableCell>
             <TableCell>
               <Typography variant="subtitle1"><b>Status</b>
               </Typography>
-            </TableCell>
-            <TableCell colSpan={2}>
-              <Typography variant="subtitle1"><b>Ações</b></Typography>
             </TableCell>
           </TableRow>
 
@@ -89,10 +104,28 @@ export default function TableProfessor({ data, setData }) {
           {data && data.map(professor => (
             <TableRow key={professor.id}>
               <TableCell>
-                {professor.nome_professor}
+                {professor.nomeProfessor}
               </TableCell>
               <TableCell>
-                {professor.email_professor}
+                {professor.cpfProfessor}
+              </TableCell>
+              <TableCell>
+                {professor.rgProfessor}
+              </TableCell>
+              <TableCell>
+                {professor.dataNascProfessor}
+              </TableCell>
+              <TableCell>
+                {professor.telefoneProfessor}
+              </TableCell>
+              <TableCell>
+                {professor.emailProfessor}
+              </TableCell>
+              <TableCell>
+                {professor.enderecoProfessor}
+              </TableCell>
+              <TableCell>
+                {professor.cepProfessor}
               </TableCell>
               <TableCell>
               <Button variant="contained" color="primary"

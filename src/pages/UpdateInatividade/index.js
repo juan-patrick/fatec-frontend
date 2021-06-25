@@ -39,7 +39,9 @@ export default function UpdateInatividade() {
 
 
   const InatividadeSchema = Yup.object().shape({
-    nomeInatividade: Yup.string().min(3, 'Nome muito pequeno.').max(45, 'Nome é muito grande').required(),
+    motivo: Yup.string().min(4, "Motivo muito pequeno.").max(100, "Motivo é muito grande").required(),
+    dataInicio: Yup.date().required(),
+    dataFim: Yup.date().required(),
     status: Yup.bool(),
   });
 
@@ -66,7 +68,7 @@ export default function UpdateInatividade() {
               {loading ?
                 <Grid container item md={12} xs={12} justify="center" alignItems="center" style={{ minHeight: 300 }}>
                   <CircularProgress />
-                </Grid> : <Formik initialValues={{ nomeInatividade: inatividade.nomeInatividade }} validationSchema={InatividadeSchema} onSubmit={(values, { resetForm }) => {
+                </Grid> : <Formik initialValues={{ motivo: inatividade.motivo, dataInicio: inatividade.dataInicio, dataFim: inatividade.dataFim }} validationSchema={InatividadeSchema} onSubmit={(values, { resetForm }) => {
                   handleSubmit(values, resetForm);
                 }}>
                   {({ handleChange, values, errors }) => (
@@ -74,8 +76,32 @@ export default function UpdateInatividade() {
                       <CardContent>
                         <Grid container spacing={3}>
                           <Grid item md={12} xs={12}>
-                            <TextField id="nomeInatividade" name="nomeInatividade" label="Nome da Inatividade" variant="outlined" required value={values.nomeInatividade} onChange={handleChange} fullWidth error={errors.nomeInatividade ? true : false} helperText={errors.nomeInatividade} />
+                            <TextField id="motivo" name="motivo" label="Motivo da Inatividade" variant="outlined" required value={values.motivo} onChange={handleChange} fullWidth error={errors.motivo ? true : false} helperText={errors.motivo} />
                           </Grid>
+                          <Grid item md={12} xs={12}>
+                          <TextField
+                            id="dataInicio"
+                            label="Data de inicio"
+                            type="date"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={handleChange}
+                            value={values.dataInicio}
+                          />
+                        </Grid>
+                        <Grid item md={12} xs={12}>
+                          <TextField
+                            id="dataFim"
+                            label="Data fim"
+                            type="date"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={handleChange}
+                            value={values.dataFim}
+                          />
+                        </Grid>
                           <Grid item md={12} xs={12}>
                             <FormControl component="fieldset">
                               <FormLabel component="legend">Status</FormLabel>

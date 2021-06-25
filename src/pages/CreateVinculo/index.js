@@ -29,10 +29,7 @@ export default function CreateVinculo() {
   const history = useHistory();
 
   const VinculoSchema = Yup.object().shape({
-    nomeVinculo: Yup.string()
-      .min(3, "Nome muito pequeno.")
-      .max(45, "Nome é muito grande")
-      .required(),
+    tipoVinculo: Yup.string().min(3, "Nome muito pequeno.").max(45, "Nome é muito grande").required(),
     status: Yup.bool(),
   });
 
@@ -69,7 +66,7 @@ export default function CreateVinculo() {
               <Divider />
               <Formik
                 initialValues={{
-                  nomeVinculo: "",
+                  tipoVinculo: "",
                   status: true,
                 }}
                 validationSchema={VinculoSchema}
@@ -83,16 +80,16 @@ export default function CreateVinculo() {
                       <Grid container spacing={3}>
                         <Grid item md={12} xs={12}>
                           <TextField
-                            id="nomeVinculo"
-                            name="nomeVinculo"
-                            label="Nome do Vinculo"
+                            id="tipoVinculo"
+                            name="tipoVinculo"
+                            label="Tipo do Vinculo"
                             variant="outlined"
                             required
-                            value={values.nomeVinculo}
+                            value={values.tipoVinculo}
                             onChange={handleChange}
                             fullWidth
-                            error={errors.nomeVinculo ? true : false}
-                            helperText={errors.nomeVinculo}
+                            error={errors.tipoVinculo ? true : false}
+                            helperText={errors.tipoVinculo}
                           />
                         </Grid>
                         <Grid item md={12} xs={12}>
