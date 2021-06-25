@@ -71,6 +71,7 @@ export default function CreatePeriodo() {
                                                     <TextField
                                                         id="nome_periodo"
                                                         label="Nome do periodo"
+                                                        variant="outlined"
                                                         onChange={handleChange}
                                                         value={values.nomePeriodo}
                                                         fullWidth

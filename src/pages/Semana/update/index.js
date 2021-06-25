@@ -67,7 +67,7 @@ export default function UpdateSemana() {
     return (
         <Page>
             <Grid container spacing={2}>
-                <Grid item container spacing={2}>
+                <Grid item container spacing={2} justify="center">
                     <Grid item md={8} xs={12}>
                         <Typography variant="h5" gutterBottom>
                             Alteração de Semana
@@ -114,7 +114,8 @@ export default function UpdateSemana() {
                                                             label="Nome da semana"
                                                             onChange={handleChange}
                                                             value={values.nome_semana}
-
+                                                            variant="outlined"
+                                                            fullWidth
                                                         />
                                                     </Grid>
                                                 </Grid>

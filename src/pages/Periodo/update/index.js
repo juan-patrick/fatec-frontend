@@ -67,7 +67,7 @@ export default function UpdatePeriodo() {
     return (
         <Page>
             <Grid container spacing={2}>
-                <Grid item container spacing={2}>
+                <Grid item container spacing={2} justify="center">
                     <Grid item md={8} xs={12}>
                         <Typography variant="h5" gutterBottom>
                             Alteração de Periodo
@@ -114,7 +114,8 @@ export default function UpdatePeriodo() {
                                                             label="Nome do periodo"
                                                             onChange={handleChange}
                                                             value={values.nome_periodo}
-
+                                                            variant="outlined"
+                                                            fullWidth
                                                         />
                                                     </Grid>
                                                 </Grid>

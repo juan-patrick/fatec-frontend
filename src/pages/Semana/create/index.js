@@ -72,7 +72,9 @@ export default function CreateSemana() {
                                                         id="nome_semana"
                                                         label="Nome da semana"
                                                         onChange={handleChange}
+                                                        variant="outlined"
                                                         value={values.nome_semana}
+                                                        variant="outlined"
                                                         fullWidth
                                                     />
                                                 </Grid>
