@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Grade = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  max-width: 584px;
   border: 1px solid #c2c2c2;
   border-radius: 10px;
   margin: 15px 0;

@@ -50,7 +50,7 @@ export default function CreateMatriz() {
   });
   const [disciplinasToShow, setDisciplinasToShow] = useState([]);
   const [cursosToShow, setCursosToShow] = useState([]);
-  const handleSubmit = useCallback(
+  const handleSubmitMatriz = useCallback(
     async (values, resetForm) => {
       try {
         const response = await api.post("/matriz", values);
@@ -62,6 +62,14 @@ export default function CreateMatriz() {
     },
     [history]
   );
+  const handleSubmitSemestre = useCallback(async (values, resetForm) => {
+    try {
+      const response = await api.post("/disciplinaMatriz", values);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
   const getDisciplinas = async () => {
     try {
       const response = await api.get("/disciplina");
@@ -125,7 +133,7 @@ export default function CreateMatriz() {
                 }}
                 validationSchema={MatrizSchema}
                 onSubmit={(values, { resetForm }) => {
-                  handleSubmit(values, resetForm);
+                  handleSubmitMatriz(values, resetForm);
                 }}
               >
                 {({ handleChange, values, errors }) => (
@@ -343,53 +351,6 @@ export default function CreateMatriz() {
                           />
                         </Grid>
                       </Grid>
-                      <Grade>
-                        {disciplinas.map((value, index) => (
-                          <>
-                            <div>
-                              {index === 0 && <p>Semestre</p>}
-                              <div>
-                                <select>
-                                  {disciplinas.map((value) => (
-                                    <option>{value}</option>
-                                  ))}
-                                </select>
-                              </div>
-                            </div>
-                            <SelectGrade>
-                              {index === 0 && <p>Disciplina</p>}
-                              <div>
-                                <span>Disciplina</span>
-                                <select>
-                                  {disciplinasToShow.map((disciplina) => (
-                                    <option>{disciplina.nomeDisciplina}</option>
-                                  ))}
-                                </select>
-                              </div>
-                            </SelectGrade>
-                            <div>
-                              {index === 0 && <p>Carga Horária</p>}
-                              <input type="text" />
-                            </div>
-                            <div>
-                              {index === 0 && <p>Aulas Prática</p>}
-                              <input type="text" />
-                            </div>
-                            <div>
-                              {index === 0 && <p>Aulas Teórica</p>}
-                              <input type="text" />
-                            </div>
-                            <div>
-                              {index === 0 && <p>Laboratório</p>}
-                              <input
-                                type="checkbox"
-                                defaultChecked={true}
-                                onChange={() => {}}
-                              />
-                            </div>
-                          </>
-                        ))}
-                      </Grade>
                     </CardContent>
                     <Divider />
                     <CardActions>
@@ -404,6 +365,118 @@ export default function CreateMatriz() {
                         </Button>
                       </Grid>
                     </CardActions>
+                  </Form>
+                )}
+              </Formik>
+              <Formik
+                initialValues={{
+                  semestre: 0,
+                  nomeDisciplina: "",
+                  cargaHoraria: "",
+                  qtdeAulaPratica: "",
+                  qtdeAulaTeorica: "",
+                  usaLaboratorio: true,
+                }}
+                onSubmit={(values, { resetForm }) => {
+                  handleSubmitSemestre(values, resetForm);
+                }}
+              >
+                {({ handleChange, values, errors }) => (
+                  <Form>
+                    <Grade>
+                      {disciplinas.map((_, index) => (
+                        <>
+                          <div>
+                            {index === 0 && <p>Semestre</p>}
+                            <div>
+                              <select>
+                                {disciplinas.map((value) => (
+                                  <option value={values.semestre}>
+                                    {value}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                          <SelectGrade>
+                            {index === 0 && <p>Disciplina</p>}
+                            <div>
+                              <select value={(e) => e.target.value}>
+                                {disciplinasToShow.map((disciplina) => (
+                                  <option value>
+                                    {disciplina.nomeDisciplina}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </SelectGrade>
+                          <div>
+                            {index === 0 && <p>Carga Horária</p>}
+                            <TextField
+                              id="cargaHoraria"
+                              label="Carga Horária"
+                              fullWidth
+                              multiline
+                              rowsMax={4}
+                              variant="outlined"
+                              onChange={handleChange}
+                              type="text"
+                              value={values.cargaHoraria}
+                            />
+                          </div>
+                          <div>
+                            {index === 0 && <p>Aulas Prática</p>}
+                            <TextField
+                              id="qtdeAulaPratica"
+                              label="Aulas práticas"
+                              fullWidth
+                              multiline
+                              rowsMax={4}
+                              variant="outlined"
+                              onChange={handleChange}
+                              type="text"
+                              value={values.qtdeAulaPratica}
+                            />
+                          </div>
+                          <div>
+                            {index === 0 && <p>Aulas Teórica</p>}
+                            <TextField
+                              id="qtdeAulaTeorica"
+                              label="Aulas Teóricas"
+                              fullWidth
+                              multiline
+                              rowsMax={4}
+                              variant="outlined"
+                              onChange={handleChange}
+                              type="text"
+                              value={values.qtdeAulaTeorica}
+                            />
+                          </div>
+                          <div>
+                            {index === 0 && <p>Laboratório</p>}
+                            <input
+                              id="usaLaboratorio"
+                              label="Laboratório"
+                              fullWidth
+                              multiline
+                              rowsMax={4}
+                              variant="outlined"
+                              onChange={handleChange}
+                              type="checkbox"
+                              defaultChecked={true}
+                            />
+                          </div>
+                        </>
+                      ))}
+                    </Grade>
+                    <Button
+                      size="large"
+                      color="primary"
+                      variant="contained"
+                      type="submit"
+                    >
+                      Cadastrar Semestre
+                    </Button>
                   </Form>
                 )}
               </Formik>
