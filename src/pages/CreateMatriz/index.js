@@ -5,7 +5,7 @@ import { Formik, Form } from "formik";
 
 import { useHistory } from "react-router-dom";
 
-import { Grade, SelectContainer } from "./styles";
+import { Grade, SelectContainer, SelectGrade } from "./styles";
 
 import {
   Card,
@@ -74,7 +74,7 @@ export default function CreateMatriz() {
   const getCursos = async () => {
     try {
       const response = await api.get("/curso");
-      setDisciplinasToShow(response.data);
+      setCursosToShow(response.data);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -137,7 +137,7 @@ export default function CreateMatriz() {
                             <p>Selecione o curso</p>
                             <select>
                               {cursosToShow.map((curso) => (
-                                <option>{curso.nome}</option>
+                                <option>{curso.nomeCurso}</option>
                               ))}
                             </select>
                           </SelectContainer>
@@ -348,17 +348,28 @@ export default function CreateMatriz() {
                           <>
                             <div>
                               {index === 0 && <p>Semestre</p>}
-                              <span>{value}</span>
+                              <div>
+                                <select>
+                                  {disciplinas.map((value) => (
+                                    <option>{value}</option>
+                                  ))}
+                                </select>
+                              </div>
                             </div>
+                            <SelectGrade>
+                              {index === 0 && <p>Disciplina</p>}
+                              <div>
+                                <span>Disciplina</span>
+                                <select>
+                                  {disciplinasToShow.map((disciplina) => (
+                                    <option>{disciplina.nomeDisciplina}</option>
+                                  ))}
+                                </select>
+                              </div>
+                            </SelectGrade>
                             <div>
                               {index === 0 && <p>Carga Horária</p>}
-                              <span>
-                                {
-                                  disciplinasToShow.map((y) => y.cargaHoraria)[
-                                    index
-                                  ]
-                                }
-                              </span>
+                              <input type="text" />
                             </div>
                             <div>
                               {index === 0 && <p>Aulas Prática</p>}
@@ -378,11 +389,6 @@ export default function CreateMatriz() {
                             </div>
                           </>
                         ))}
-                        {
-                          <div>
-                            {disciplinasToShow.map((y) => y.nomeDisciplina)}
-                          </div>
-                        }
                       </Grade>
                     </CardContent>
                     <Divider />

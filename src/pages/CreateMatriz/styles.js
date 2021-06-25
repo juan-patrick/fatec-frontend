@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Grade = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   max-width: 584px;
   border: 1px solid #c2c2c2;
   border-radius: 10px;
@@ -44,5 +44,13 @@ export const SelectContainer = styled.div`
     font-weight: 400;
     line-height: 1;
     letter-spacing: 0.00938em;
+  }
+`;
+export const SelectGrade = styled.div`
+  display: flex;
+
+  justify-content: left;
+  > div {
+    display: flex;
   }
 `;
