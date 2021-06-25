@@ -56,9 +56,8 @@ import CreateTipoContrato from "./pages/CreateTipoContrato";
 import UpdateTipoContrato from "./pages/UpdateTipoContrato";
 
 import Login from "./pages/Login";
-// GRUPO 4
-import { ListSemana, CreateSemana, UpdateSemana } from "./pages/Semana"
-import { ListPeriodo, CreatePeriodo, UpdatePeriodo } from "./pages/Periodo"
+import { ListSemana, CreateSemana, UpdateSemana } from "./pages/Semana";
+import { ListPeriodo, CreatePeriodo, UpdatePeriodo } from "./pages/Periodo";
 
 
 export default function Routes() {
@@ -71,8 +70,8 @@ export default function Routes() {
     >
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={CursoExtensao} />
-          <PrivateRoute path="/login" component={Login} permission={1} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute path="/" exact component={CursoExtensao} />
           <PrivateRoute path="/cursoExtensao" component={CursoExtensao} permission={1} />
           <PrivateRoute path="/create/cursoExtensao" component={CreateCursoExtensao} permission={1} />
           <PrivateRoute path="/update/cursoExtensao/:cursoExtensaoId" component={UpdateCursoExtensao} permission={1}
