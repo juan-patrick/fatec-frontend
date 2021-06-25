@@ -39,8 +39,14 @@ export default function UpdateProfessor() {
 
 
   const ProfessorSchema = Yup.object().shape({
-    nome_professor: Yup.string().min(3, 'Nome muito pequeno.').max(45, 'Nome é muito grande').required(),
-    email_professor: Yup.string().max(45).required(),
+    nomeProfessor: Yup.string().min(1, "Nome muito pequeno.").max(100, "Nome é muito grande").required(),
+    cpfProfessor: Yup.number().required(),
+    rgProfessor: Yup.number().required(),
+    enderecoProfessor: Yup.string().max(100, "Endereço muito grande").required(),
+    cepProfessor: Yup.number().required(),
+    telefoneProfeesor: Yup.number().required(),
+    emailProfessor: Yup.string().max(100, "Email muito grande").required(),
+    dataNascProfessor: Yup.date().required(),
     status: Yup.bool(),
   });
 
@@ -67,7 +73,7 @@ export default function UpdateProfessor() {
               {loading ?
                 <Grid container item md={12} xs={12} justify="center" alignItems="center" style={{ minHeight: 300 }}>
                   <CircularProgress />
-                </Grid> : <Formik initialValues={{ nome_professor: professor.nome_professor, email_professor: professor.email_professor }} validationSchema={ProfessorSchema} onSubmit={(values, { resetForm }) => {
+                </Grid> : <Formik initialValues={{ nomeProfessor: professor.nomeProfessor, cpfProfessor: professor.cpfProfessor, rgProfessor: professor.rgProfessor, dataNascProfessor: professor.dataNascProfessor, telefoneProfessor: professor.telefoneProfessor, emailProfessor: professor.emailProfessor, enderecoProfessor: professor.enderecoProfessor, cepProfessor: professor.cepProfessor }} validationSchema={ProfessorSchema} onSubmit={(values, { resetForm }) => {
                   handleSubmit(values, resetForm);
                 }}>
                   {({ handleChange, values, errors }) => (
@@ -75,10 +81,37 @@ export default function UpdateProfessor() {
                       <CardContent>
                         <Grid container spacing={3}>
                           <Grid item md={12} xs={12}>
-                            <TextField id="nome_professor" name="nome_professor" label="Nome do Professor" variant="outlined" required value={values.nome_professor} onChange={handleChange} fullWidth error={errors.nome_professor ? true : false} helperText={errors.nome_professor} />
+                            <TextField id="nomeProfessor" name="nomeProfessor" label="Nome do Professor" variant="outlined" required value={values.nomeProfessor} onChange={handleChange} fullWidth error={errors.nomeProfessor ? true : false} helperText={errors.nomeProfessor} />
                           </Grid>
                           <Grid item md={12} xs={12}>
-                            <TextField id="email_professor" name="email_professor" label="Email do Professor" variant="outlined" required value={values.email_professor} onChange={handleChange} fullWidth />
+                            <TextField id="cpfProfessor" name="cpfProfessor" label="CPF do Professor" variant="outlined" required value={values.cpfProfessor} onChange={handleChange} fullWidth error={errors.cpfProfessor ? true : false} helperText={errors.cpfProfessor} />
+                          </Grid>
+                          <Grid item md={12} xs={12}>
+                            <TextField id="rgProfessor" name="rgProfessor" label="RG do Professor" variant="outlined" required value={values.rgProfessor} onChange={handleChange} fullWidth error={errors.rgProfessor ? true : false} helperText={errors.rgProfessor} />
+                          </Grid>
+                          <Grid item md={12} xs={12}>
+                          <TextField
+                            id="dataNascProfessor"
+                            label="Data de nascimento do professor"
+                            type="date"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={handleChange}
+                            value={values.dataNascProfessor}
+                          />
+                        </Grid>
+                          <Grid item md={12} xs={12}>
+                            <TextField id="telefoneProfessor" name="telefoneProfessor" label="Telefone do Professor" variant="outlined" required value={values.telefoneProfessor} onChange={handleChange} fullWidth error={errors.telefoneProfessor ? true : false} helperText={errors.telefoneProfessor} />
+                          </Grid>
+                          <Grid item md={12} xs={12}>
+                            <TextField id="emailProfessor" name="emailProfessor" label="Email do Professor" variant="outlined" required value={values.emailProfessor} onChange={handleChange} fullWidth />
+                          </Grid>
+                          <Grid item md={12} xs={12}>
+                            <TextField id="enderecoProfessor" name="enderecoProfessor" label="Endereço do Professor" variant="outlined" required value={values.enderecoProfessor} onChange={handleChange} fullWidth error={errors.enderecoProfessor ? true : false} helperText={errors.enderecoProfessor} />
+                          </Grid>
+                          <Grid item md={12} xs={12}>
+                            <TextField id="cepProfessor" name="cepProfessor" label="CEP do Professor" variant="outlined" required value={values.cepProfessor} onChange={handleChange} fullWidth/>
                           </Grid>
                           <Grid item md={12} xs={12}>
                             <FormControl component="fieldset">

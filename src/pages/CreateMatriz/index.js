@@ -5,7 +5,7 @@ import { Formik, Form } from "formik";
 
 import { useHistory } from "react-router-dom";
 
-import { Grade } from "./styles";
+import { Grade, SelectContainer } from "./styles";
 
 import {
   Card,
@@ -49,6 +49,7 @@ export default function CreateMatriz() {
     areasAtuacao: Yup.string().required(),
   });
   const [disciplinasToShow, setDisciplinasToShow] = useState([]);
+  const [cursosToShow, setCursosToShow] = useState([]);
   const handleSubmit = useCallback(
     async (values, resetForm) => {
       try {
@@ -70,8 +71,18 @@ export default function CreateMatriz() {
       console.log(err);
     }
   };
+  const getCursos = async () => {
+    try {
+      const response = await api.get("/curso");
+      setDisciplinasToShow(response.data);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
     getDisciplinas();
+    getCursos();
   }, []);
   const disciplinas = [1, 2, 3, 4, 5, 6];
   return (
@@ -122,6 +133,14 @@ export default function CreateMatriz() {
                     <CardContent>
                       <Grid container spacing={3}>
                         <Grid item md={12} xs={12}>
+                          <SelectContainer>
+                            <p>Selecione o curso</p>
+                            <select>
+                              {cursosToShow.map((curso) => (
+                                <option>{curso.nome}</option>
+                              ))}
+                            </select>
+                          </SelectContainer>
                           <TextField
                             id="descricaoMatriz"
                             label="Descrição da Matriz"

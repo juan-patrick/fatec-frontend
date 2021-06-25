@@ -1,5 +1,5 @@
 import Page from '../../components/Page';
-import TableProfessor from '../../components/TableProfessor';
+import TableInatividade from '../../components/TableInatividade';
 import api from '../../services/api';
 import { useEffect, useState } from 'react';
 import { Grid, Button, Typography, Link } from '@material-ui/core';
@@ -37,7 +37,7 @@ function Inatividade() {
           </Grid>
         </Grid>
         <Grid item sm={12} md={12} xs={12}>
-          <TableProfessor data={inatividades} setData={getInatividades} />
+          <TableInatividade data={inatividades} setData={getInatividades} />
         </Grid>
       </Grid>
     </Page>

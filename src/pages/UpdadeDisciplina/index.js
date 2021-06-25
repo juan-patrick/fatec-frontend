@@ -41,7 +41,7 @@ export default function UpdateDisciplina() {
   };
   useEffect(() => {
     getDisciplina();
-  });
+  },[]);
 
   const DisciplinaSchema = Yup.object().shape({
     nomeDisciplina: Yup.string()

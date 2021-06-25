@@ -104,8 +104,8 @@ export default function TableHorario({ data, setData }) {
                 <TableBody>
                     {data && data.map((horario) => (
                         <TableRow key={horario.id}>
-                            <TableCell>{horario.HorarioInicial}</TableCell>
-                            <TableCell>{horario.HorarioFinal}</TableCell>
+                            <TableCell>{horario.horarioInicial}</TableCell>
+                            <TableCell>{horario.horarioFinal}</TableCell>
                             <TableCell>
                                 <Button
                                     variant="contained"

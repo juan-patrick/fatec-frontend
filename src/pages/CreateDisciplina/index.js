@@ -20,8 +20,10 @@ import {
 import * as Yup from "yup";
 
 import api from "../../services/api";
+import { getCEP } from "../../services/brasilAPI";
 
 export default function CreateDisciplina() {
+  const handleGetCep = (cep) => getCEP(cep)
   const history = useHistory();
   const DisciplinaSchema = Yup.object().shape({
     nomeDisciplina: Yup.string()

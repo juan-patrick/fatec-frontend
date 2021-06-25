@@ -48,10 +48,10 @@ export default function UpdateHorario() {
 
   useEffect(() => {
     getHorario();
-  });
+  },[]);
   const HorarioSchema = Yup.object().shape({
-    HorarioInicial: Yup.string().required(),
-    HorarioFinal: Yup.string().required(),
+    horarioInicial: Yup.string().required(),
+    horarioFinal: Yup.string().required(),
   });
 
   const handleSubmit = async (values, resetForm) => {
@@ -100,8 +100,8 @@ export default function UpdateHorario() {
               ) : (
                 <Formik
                   initialValues={{
-                    HorarioInicial: horario.HorarioInicial,
-                    HorarioFinal: horario.HorarioFinal,
+                    horarioInicial: horario.horarioInicial,
+                    horarioFinal: horario.horarioFinal,
                   }}
                   validationSchema={HorarioSchema}
                   onSubmit={(values, { resetForm }) => {
@@ -121,7 +121,7 @@ export default function UpdateHorario() {
                                 shrink: true,
                               }}
                               onChange={handleChange}
-                              value={values.HorarioInicial}
+                              value={values.horarioInicial}
                             />
                           </Grid>
                           <Grid item md={12} xs={12}>
@@ -133,7 +133,7 @@ export default function UpdateHorario() {
                                 shrink: true,
                               }}
                               onChange={handleChange}
-                              value={values.HorarioFinal}
+                              value={values.horarioFinal}
                             />
                           </Grid>
                         </Grid>
