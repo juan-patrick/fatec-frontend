@@ -32,12 +32,17 @@ import {
   HowToReg,
   CalendarViewDayOutlined,
   AccessAlarm,
+  PowerSettingsNewRounded
 } from "@material-ui/icons";
+
+import MenuIcon from '@material-ui/icons/Menu';
 
 import clsx from "clsx";
 import { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
+
+import { logout } from '../../services/auth';
 
 export default function DrawerBar() {
   const history = useHistory();
@@ -54,6 +59,11 @@ export default function DrawerBar() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+    history.push('/login');
   };
 
   return (
@@ -73,7 +83,9 @@ export default function DrawerBar() {
             className={clsx(classes.menuButton, {
               [classes.hide]: open,
             })}
-          ></IconButton>
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography variant="h6" noWrap>
             FATEC
           </Typography>
@@ -190,63 +202,65 @@ export default function DrawerBar() {
           </ListItem>
           <ListItem button key="Professor" onClick={(e) => history.push('/professores')}>
             <ListItemIcon>
-              <HowToReg/>
+              <HowToReg />
             </ListItemIcon>
             <ListItemText primary="Professor" />
           </ListItem>
           <ListItem button key="Inatividade" onClick={(e) => history.push('/inatividades')}>
             <ListItemIcon>
-              <WorkOff />            
+              <WorkOff />
             </ListItemIcon>
             <ListItemText primary="Inatividade" />
           </ListItem>
           <ListItem button key="Vinculo" onClick={(e) => history.push('/vinculos')}>
             <ListItemIcon>
-              <SupervisedUserCircle/>
+              <SupervisedUserCircle />
             </ListItemIcon>
             <ListItemText primary="Vinculo" />
           </ListItem>
         </List>
 
         <ListItem button key="Semana" onClick={(e) => history.push('/semana')}>
-            <ListItemIcon>
-              <CalendarViewDayOutlined />
-            </ListItemIcon>
-            <ListItemText primary="Semana" />
-          </ListItem>
+          <ListItemIcon>
+            <CalendarViewDayOutlined />
+          </ListItemIcon>
+          <ListItemText primary="Semana" />
+        </ListItem>
 
-          <ListItem button key="Periodo" onClick={(e) => history.push('/periodo')}>
-            <ListItemIcon>
-              <AccessAlarm />
-            </ListItemIcon>
-            <ListItemText primary="Periodo" />
-          </ListItem>
+        <ListItem button key="Periodo" onClick={(e) => history.push('/periodo')}>
+          <ListItemIcon>
+            <AccessAlarm />
+          </ListItemIcon>
+          <ListItemText primary="Periodo" />
+        </ListItem>
 
-          
-          <ListItem button key="EmpregoPublico" onClick={(e) => history.push('/empregoPublico')}>
-            <ListItemIcon>
-              <AccessAlarm />
-            </ListItemIcon>
-            <ListItemText primary="empregoPublico" />
-          </ListItem>
 
-          <ListItem button key="Titulacao" onClick={(e) => history.push('/titulacao')}>
-            <ListItemIcon>
-              <AccessAlarm />
-            </ListItemIcon>
-            <ListItemText primary="titulacao" />
-          </ListItem>
+        <ListItem button key="EmpregoPublico" onClick={(e) => history.push('/empregoPublico')}>
+          <ListItemIcon>
+            <AccessAlarm />
+          </ListItemIcon>
+          <ListItemText primary="empregoPublico" />
+        </ListItem>
 
-          <ListItem button key="TipoContrato" onClick={(e) => history.push('/tipoContrato')}>
-            <ListItemIcon>
-              <AccessAlarm />
-            </ListItemIcon>
-            <ListItemText primary="tipoContrato" />
-          </ListItem>
+        <ListItem button key="Titulacao" onClick={(e) => history.push('/titulacao')}>
+          <ListItemIcon>
+            <AccessAlarm />
+          </ListItemIcon>
+          <ListItemText primary="titulacao" />
+        </ListItem>
+
+        <ListItem button key="TipoContrato" onClick={(e) => history.push('/tipoContrato')}>
+          <ListItemIcon>
+            <AccessAlarm />
+          </ListItemIcon>
+          <ListItemText primary="tipoContrato" />
+        </ListItem>
 
         <List className={classes.last}>
-          <ListItem button key="logout">
-            <ListItemIcon></ListItemIcon>
+          <ListItem button key="logout" onClick={handleLogout}>
+            <ListItemIcon>
+              <PowerSettingsNewRounded />
+            </ListItemIcon>
             <ListItemText primary="Log out" />
           </ListItem>
         </List>
