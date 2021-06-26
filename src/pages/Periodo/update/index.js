@@ -71,7 +71,7 @@ export default function UpdatePeriodo() {
                     <Grid item md={8} xs={12}>
                         <Typography variant="h5" gutterBottom>
                             Alteração de Periodo
-            </Typography>
+                      </Typography>
                     </Grid>
                     <Grid item md={7} xs={12}>
                         <Card>
@@ -79,7 +79,7 @@ export default function UpdatePeriodo() {
                                 title={
                                     <Typography variant="h6">
                                         Formulário de Alteração de Periodo
-                  </Typography>
+                                    </Typography>
                                 }
                             />
                             <Divider />
@@ -136,7 +136,6 @@ export default function UpdatePeriodo() {
                                         </Form>
                                     )}
                                 </Formik>
-
                             }
                         </Card>
                     </Grid>

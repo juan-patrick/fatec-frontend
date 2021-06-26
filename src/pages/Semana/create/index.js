@@ -41,7 +41,7 @@ export default function CreateSemana() {
                     <Grid item md={8} xs={12}>
                         <Typography variant="h5" gutterBottom>
                             Cadastro de Semana
-            </Typography>
+                        </Typography>
                     </Grid>
                     <Grid item md={7} xs={12}>
                         <Card>
@@ -90,7 +90,7 @@ export default function CreateSemana() {
                                                     type="submit"
                                                 >
                                                     Criar Semana
-                        </Button>
+                                                </Button>
                                             </Grid>
                                         </CardActions>
                                     </Form>
@@ -100,10 +100,6 @@ export default function CreateSemana() {
                     </Grid>
                 </Grid>
             </Grid>
-
-
         </Page>
     )
-
-
 }

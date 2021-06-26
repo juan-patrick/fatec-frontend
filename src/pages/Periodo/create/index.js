@@ -41,7 +41,7 @@ export default function CreatePeriodo() {
                     <Grid item md={8} xs={12}>
                         <Typography variant="h5" gutterBottom>
                             Cadastro de Periodo
-            </Typography>
+                        </Typography>
                     </Grid>
                     <Grid item md={7} xs={12}>
                         <Card>
@@ -89,7 +89,7 @@ export default function CreatePeriodo() {
                                                     type="submit"
                                                 >
                                                     Criar Periodo
-                        </Button>
+                                                </Button>
                                             </Grid>
                                         </CardActions>
                                     </Form>
@@ -99,10 +99,6 @@ export default function CreatePeriodo() {
                     </Grid>
                 </Grid>
             </Grid>
-
-
         </Page>
     )
-
-
 }
